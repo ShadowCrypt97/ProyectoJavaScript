@@ -16,6 +16,11 @@ class Cliente{
         return regexpEmail.test(this.correo);
     }
 
+    validarFecha(fecha){
+        let regexpFecha = /^(?:3[01]|[12][0-9]|0?[1-9])([/])(0?[1-9]|1[1-2])\1\d{4}$/;
+        return regexpFecha.test(fecha);
+    }
+
     registrarUsuario(nombre, apellido, telefono, correo, contrasenha, confirmarContrasenha){
         this.nombre = nombre;
         this.apellido = apellido;
@@ -38,7 +43,19 @@ class Cliente{
     }
 
     setFechaAlquiler(){
-        this.fechaAlquiler = prompt("ingrese una fecha para reservar la cancha");
+        this.fechaAlquiler = prompt(
+            "Estimado Cliente:\n"+
+            "ingrese una fecha para reservar la cancha\n"+
+            "formato fecha dd/mm/aaaa \n"+
+            "Nota: Si la fecha de alquiler no coincide con la fecha disponible establecida por el local no se podrá alquilar la cancha.");
+
+        while(!this.validarFecha(this.fechaAlquiler)){
+            this.fechaAlquiler = prompt(
+                "Fecha ingresada no disponible\n"+
+                "favor ingrese una nueva fecha para reservar la cancha\n"+
+                "formato fecha dd/mm/aaaa \n"+
+                "Nota: Si la fecha de alquiler no coincide con la fecha disponible establecida por el local no se podrá alquilar la cancha.");    
+        }
     }
 
     pagarCancha(precioCancha,disponibiliad){
@@ -90,7 +107,7 @@ class CanchaFutbol{
 
     
         if(this.ciudad != "" && this.direccion != "" && this.formatoCancha != "" && this.precio != 0 && this.fechaCancha != ""){
-            if(this.ciudad.length >= 3 && this.direccion.length >= 8 && !isNaN(this.formatoCancha) && !isNaN(this.precio) && regexFecha.test(this.fechaCancha)){
+            if(this.ciudad.length >= 3 && this.direccion.length >= 5 && !isNaN(this.formatoCancha) && !isNaN(this.precio) && regexFecha.test(this.fechaCancha)){
                 return true;
             }
             else
@@ -132,16 +149,45 @@ const procesoReserva = () => {
     const cancha = new CanchaFutbol();
     const cliente = new Cliente();
 
-    let canchaIsRegistered = cancha.registrarCancha(prompt("Ingresa la ciudad de tu cancha *"),prompt("Ingresa la dirección de tu cancha *"),parseInt(prompt("Ingresa el tamaño de la cancha *")),parseFloat(prompt("Ingresa el precio de la cancha *")),prompt("Ingresa la fecha para alquilar la cancha *"));
+    let canchaIsRegistered = cancha.registrarCancha(
+        prompt("Ingresa la ciudad de tu cancha *"),
+        prompt("Ingresa la dirección de tu cancha *"),
+        parseInt(prompt("Ingresa el tamaño de la cancha (solo numeros son aceptados)*\n"+
+        "Escriba los siguientes tamaños de cancha:\n"+
+        "[11] -> Futbol 11\n"+
+        "[8] -> Futbol 8\n"+
+        "[7] -> Futbol 7\n"+
+        "[5] -> Futbol 5\n"
+        )),
+        parseFloat(prompt("Ingresa el precio de la cancha (solo numeros son aceptados)*")),
+        prompt("Ingresa una fecha en la que la cancha estará disponible*\nFormato fecha aceptado: (dd/mm/aaaa)")
+    );
 
     while(!canchaIsRegistered)
     {
         alert("REGISTRO CANCHA");
         alert("Por favor ingresa todos los campos para continuar!");
-        canchaIsRegistered = cancha.registrarCancha(prompt("Ingresa la ciudad de tu cancha\nLONGITUD MINIMA 3 CARACTERES"),prompt("Ingresa la dirección de tu cancha\nLONGITUD MINIMA 8 CARACTERES"),parseInt(prompt("Ingresa el tamaño de la cancha\nDEBE SER EL NUMERO DE JUGADORES POR EQUIPO")),parseFloat(prompt("Ingresa el precio de la cancha\nDEBE SER EL PRECIO DE LA CANCHA(EJ: 120000)")),prompt("Ingresa la fecha para alquilar la cancha\nDEBE SER DE FORMATO FECHA (dd/mm/aaaa)"));
+        canchaIsRegistered = cancha.registrarCancha(
+            prompt("Ingresa la ciudad de tu cancha*\nLONGITUD MINIMA 3 CARACTERES"),
+            prompt("Ingresa la dirección de tu cancha*\nLONGITUD MINIMA 8 CARACTERES"),
+            parseInt(prompt("Ingresa el tamaño de la cancha*\nDEBE SER EL NUMERO DE JUGADORES POR EQUIPO\n"+
+            "Escriba los siguientes tamaños de cancha:\n"+
+            "[11] -> Futbol 11\n"+
+            "[8] -> Futbol 8\n"+
+            "[7] -> Futbol 7\n"+
+            "[5] -> Futbol 5\n")),
+            parseFloat(prompt("Ingresa el precio de la cancha*\nDEBE SER EL PRECIO DE LA CANCHA(EJ: 120000.50)")),
+            prompt("Ingresa una fecha en la que la cancha estará disponible*\nDEBE SER DE FORMATO FECHA (dd/mm/aaaa)"));
     }
 
-    let userIsRegistered = cliente.registrarUsuario(prompt("Ingresa tu nombre *"),prompt("Ingresa tu apellido *"),prompt("Ingresa tu telefono"), prompt("Ingresa tu correo\n(EX: john.doe@example.com)*"),prompt("Ingresa tu contraseña *"), prompt("Ingresa tu contraseña nuevamente *"));
+    let userIsRegistered = cliente.registrarUsuario(
+        prompt("Ingresa tu nombre*"),
+        prompt("Ingresa tu apellido *"),
+        prompt("Ingresa tu telefono"), 
+        prompt("Ingresa tu correo\n(EX: john.doe@example.com)*"),
+        prompt("Ingresa tu contraseña (min 8 caracteres)*"), 
+        prompt("Ingresa tu contraseña nuevamente (debe ser exactamente igual a la anterior)*")
+    );
     while(!userIsRegistered) 
     {
         alert("REGISTRO CLIENTE");
