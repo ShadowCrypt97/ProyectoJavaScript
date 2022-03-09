@@ -1,0 +1,91 @@
+@import "./vars";
+@import "./mediaQueries";
+
+.register{
+    display: grid;
+    grid-template-rows: auto;
+    justify-items: center;
+    height: 100%;
+    &__link--colorTyC{
+        color:$morado;
+        font-weight: 700;
+    }
+    &__link--colorLoginLink{
+        color:$azul;
+        font-weight: 700;
+    }
+    &__bg{
+        background-image: url("../../images/Fondo.png");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    &__texto{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        font-size: 1.5rem;
+        gap: 40px;
+        &--color{
+            color: $blanco;
+            font-weight: 700;
+        }
+    }
+
+    &__titulo{
+        font-size: 3rem;
+        color: $blanco;
+    }
+    &__parrafo{
+        font-weight: 300;
+    }
+}
+
+.formContainer{
+    display: flex;
+    background: linear-gradient(119deg, rgba(15, 170, 255, 0.75) 0%, rgba(121, 61, 200, 0.75) 100%);
+    border: $negro 5px solid;
+    border-radius: 10px;
+    flex-direction: column;
+    height: fit-content;
+    width:50%;
+    @include mobile{
+        width: 100%;
+    }
+    @include desktop4k{
+        width: 30%;
+    }
+}
+.alreadyRegistered{
+    display: flex;
+    flex-direction: column;
+    grid-area: alreadyRegistered;
+    align-items: flex-end  
+}
+
+.containerFields{
+    display: flex;
+    flex-direction: column;
+    align-items:flex-start;
+    gap: 5px;
+    text-align: center;
+}
+.checkbox{
+    align-items: center;
+    gap:20px;
+}
+.containerButtons{
+    display: flex;
+    justify-items: center;
+    justify-content: center;
+    gap: 40px;
+}
+
+.fields{
+    width: 100%;
+    height: 30px;
+}
+.checkbox{
+    flex-direction: row;
+}
+

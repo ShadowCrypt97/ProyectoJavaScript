@@ -1,0 +1,147 @@
+/* Color Theme Swatches in Hex */
+/* Color Theme Swatches in RGBA */
+/* Color Theme Swatches in HSLA */
+/* Color Theme Swatches in Hex */
+/* Color Theme Swatches in RGBA */
+/* Color Theme Swatches in HSLA */
+.register {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: auto;
+      grid-template-rows: auto;
+  justify-items: center;
+  height: 100%;
+}
+
+.register__link--colorTyC {
+  color: #481368;
+  font-weight: 700;
+}
+
+.register__link--colorLoginLink {
+  color: #05DBF2;
+  font-weight: 700;
+}
+
+.register__bg {
+  background-image: url("../../images/Fondo.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.register__texto {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  text-align: center;
+  font-size: 1.5rem;
+  gap: 40px;
+}
+
+.register__texto--color {
+  color: #fff;
+  font-weight: 700;
+}
+
+.register__titulo {
+  font-size: 3rem;
+  color: #fff;
+}
+
+.register__parrafo {
+  font-weight: 300;
+}
+
+.formContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background: linear-gradient(119deg, rgba(15, 170, 255, 0.75) 0%, rgba(121, 61, 200, 0.75) 100%);
+  border: #0D0D0D 5px solid;
+  border-radius: 10px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  width: 50%;
+}
+
+@media screen and (max-width: 768px) {
+  .formContainer {
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 2560px) {
+  .formContainer {
+    width: 30%;
+  }
+}
+
+.alreadyRegistered {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  grid-area: alreadyRegistered;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+}
+
+.containerFields {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  gap: 5px;
+  text-align: center;
+}
+
+.checkbox {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 20px;
+}
+
+.containerButtons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 40px;
+}
+
+.fields {
+  width: 100%;
+  height: 30px;
+}
+
+.checkbox {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+/*# sourceMappingURL=main.css.map */
