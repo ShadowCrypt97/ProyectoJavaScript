@@ -153,4 +153,6 @@ const procesoCompleto = () =>{
     }
 }
 
+procesoRegistroCliente();
+
 

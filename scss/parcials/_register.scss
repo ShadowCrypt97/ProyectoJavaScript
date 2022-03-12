@@ -2,23 +2,30 @@
 @import "./mediaQueries";
 
 .register{
-    display: grid;
-    grid-template-rows: auto;
-    justify-items: center;
-    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    block-size: 100vh;
+    align-items: center;
+    @include mobile{
+       block-size: auto;
+    }
+    @include tablet{
+        block-size: auto;
+    }
     &__link--colorTyC{
-        color:$morado;
+        color:$blanco;
         font-weight: 700;
     }
     &__link--colorLoginLink{
-        color:$azul;
+        color:$blanco;
         font-weight: 700;
     }
     &__bg{
         background-image: url("../../images/Fondo.png");
         background-size: cover;
         background-position: center;
-        background-repeat: no-repeat;
+        background-repeat: repeat;
     }
     &__texto{
         display: flex;
@@ -40,15 +47,17 @@
         font-weight: 300;
     }
 }
-
+.form-label{
+    color:$blanco;
+    font-weight: 500;
+}
 .formContainer{
     display: flex;
-    background: linear-gradient(119deg, rgba(15, 170, 255, 0.75) 0%, rgba(121, 61, 200, 0.75) 100%);
-    border: $negro 5px solid;
+    background: $background-gradient;
     border-radius: 10px;
+    padding: 20px;
     flex-direction: column;
     height: fit-content;
-    width:50%;
     @include mobile{
         width: 100%;
     }

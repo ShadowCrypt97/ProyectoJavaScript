@@ -5,21 +5,41 @@
 /* Color Theme Swatches in RGBA */
 /* Color Theme Swatches in HSLA */
 .register {
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-rows: auto;
-      grid-template-rows: auto;
-  justify-items: center;
-  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  block-size: 100vh;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+  .register {
+    block-size: auto;
+  }
+}
+
+@media screen and (max-width: 1280px) and (min-width: 0.768px) {
+  .register {
+    block-size: auto;
+  }
 }
 
 .register__link--colorTyC {
-  color: #481368;
+  color: #fff;
   font-weight: 700;
 }
 
 .register__link--colorLoginLink {
-  color: #05DBF2;
+  color: #fff;
   font-weight: 700;
 }
 
@@ -27,7 +47,7 @@
   background-image: url("../../images/Fondo.png");
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
+  background-repeat: repeat;
 }
 
 .register__texto {
@@ -57,13 +77,18 @@
   font-weight: 300;
 }
 
+.form-label {
+  color: #fff;
+  font-weight: 500;
+}
+
 .formContainer {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  background: linear-gradient(119deg, rgba(15, 170, 255, 0.75) 0%, rgba(121, 61, 200, 0.75) 100%);
-  border: #0D0D0D 5px solid;
+  background: linear-gradient(163deg, #ff9100 0%, rgba(0, 0, 0, 0.751138) 0%);
   border-radius: 10px;
+  padding: 20px;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -71,7 +96,6 @@
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
-  width: 50%;
 }
 
 @media screen and (max-width: 768px) {

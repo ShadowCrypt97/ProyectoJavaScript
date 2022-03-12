@@ -16,7 +16,7 @@ class Cliente{
         const formulario = document.querySelector("#formulario");
         const regexpEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
         const cliente = [];
-        let validation = true;
+        let validation;
         this.id = id.value;
         this.nombre = nombre.value;
         this.apellido = apellido.value;
@@ -30,8 +30,8 @@ class Cliente{
        
 
         function enviarFormulario(e){
-            e.preventDefault();
             validation = true;
+            e.preventDefault();
             if(nombre.value==''||nombre.value.length<3){
                 nombre.className = 'form-control is-invalid';
                 validation = false;
@@ -57,13 +57,7 @@ class Cliente{
                 validation = false;
             }
             if(!checkbox.checked){
-                const mensaje = "Debe aceptar los términos y condiciones para continuar."
-                const main = document.querySelector('.main');
-                const div = document.createElement('div');
-                div.innerHTML = `<div id="checkAlert" class="alert alert-warning" role="alert">
-                ${mensaje}
-                </div>`;
-                main.append(div);
+                crearMensaje("checkAlert","alert alert-warning","Debe aceptar los términos y condiciones para continuar.");
                 validation = false;
             }     
             if(validation) {
@@ -79,21 +73,33 @@ class Cliente{
                         termsAndConditions: checkbox.checked
                     }
                 );
-                console.log(cliente);
-                localStorage.setItem(id.value,JSON.stringify(cliente));
-                alert("Formulario enviado");
-                id.value = "";
-                nombre.value = "";
-                apellido.value = "";
-                telefono.value = "";
-                correo.value = "";
-                contrasenha.value = "";
-                confirmarContrasenha.value = "";
-                checkbox.checked = false;
+                try{
+                    if(!localStorage.getItem(id.value).includes(id.value)){
+                        guardarCliente();
+                    }else
+                        crearMensaje("userAlreadyExists","alert alert-primary", "El usuario con documento "+id.value+" ya está registrado");
+                }catch(e){
+                    guardarCliente();
+                }
+                cliente.pop();
             }
             else
-                alert("Favor completar los campos obligatorios");
+                crearMensaje("mandatoryAlert","alert alert-danger","Debe completar los campos obligatorios para continuar.");
+        
         }
+        function guardarCliente(){
+            localStorage.setItem(id.value,JSON.stringify(cliente));
+            crearMensaje("success","alert alert-success","Formulario enviado exitosamente");
+            id.value = "";
+            nombre.value = "";
+            apellido.value = "";
+            telefono.value = "";
+            correo.value = "";
+            contrasenha.value = "";
+            confirmarContrasenha.value = "";
+            checkbox.checked = false;
+        }
+
         function validarCampos(event){
             if(event.target.value.length >=3){
                 nombre.className = "form-control";
@@ -114,8 +120,20 @@ class Cliente{
                 id.className = 'form-control';
             } 
             if(checkbox.checked){
-                document.querySelector('#checkAlert').remove();
+                if(!document.querySelector('#checkAlert')==='null'){
+                    document.querySelector('#checkAlert').remove();
+                }
             }
+        }
+
+        function crearMensaje(idElementoHtml, className, mensaje){
+            const main = document.querySelector('main');
+            const div = document.createElement('div');
+            div.innerHTML = `<div id="${idElementoHtml}" class="${className}" role="alert">
+            ${mensaje}
+            </div>`;
+            main.prepend(div);
+            setTimeout(()=>{document.querySelector('#'+idElementoHtml).remove();},3000);
         }
     }
 
@@ -172,7 +190,6 @@ class Cliente{
 
 const procesoRegistroCliente = () =>{
     const cliente = new Cliente();
-    alert("REGISTRO CLIENTE");
     let id = document.querySelector("#docId");
     let nombre = document.querySelector("#username");
     let apellido = document.querySelector("#lastName");
@@ -185,5 +202,4 @@ const procesoRegistroCliente = () =>{
 }
 
 
-procesoRegistroCliente();
-JSON.parse(localStorage.getItem(1014286295));
+
