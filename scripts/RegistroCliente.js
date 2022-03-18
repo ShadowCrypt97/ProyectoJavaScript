@@ -202,4 +202,6 @@ const procesoRegistroCliente = () =>{
 }
 
 
+procesoRegistroCliente();
+
 

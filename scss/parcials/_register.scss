@@ -98,3 +98,8 @@
     flex-direction: row;
 }
 
+.body{
+    display: grid;
+    grid-template-rows: auto auto;
+}
+

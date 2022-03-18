@@ -1,0 +1,29 @@
+.headerContainer{
+    display: flex;
+    background-color: $negro;
+}
+
+.header__navbar{
+    justify-content: flex-end;
+}
+
+.navbar__items{
+    gap: 30px;
+}
+
+.img--size{
+    width: 150px;
+    transform: scale(1);
+    transition: transform 2s;
+}
+
+.img--size:hover{
+    transform: scale(1.5);
+    transition: transform 2s;
+}
+
+.bi {
+    vertical-align: -.125em;
+    fill: currentColor;
+}
+  
