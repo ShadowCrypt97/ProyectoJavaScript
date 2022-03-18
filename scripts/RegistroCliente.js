@@ -61,8 +61,7 @@ class Cliente{
                 validation = false;
             }     
             if(validation) {
-                cliente.push
-                (
+                cliente.push(
                     {
                         id: id.value,
                         nombre: nombre.value,
@@ -70,24 +69,33 @@ class Cliente{
                         telefono: telefono.value,
                         correo: correo.value,
                         contrasenha: contrasenha.value,
-                        termsAndConditions: checkbox.checked
-                    }
-                );
-                try{
-                    if(!localStorage.getItem(id.value).includes(id.value)){
-                        guardarCliente();
-                    }else
-                        crearMensaje("userAlreadyExists","alert alert-primary", "El usuario con documento "+id.value+" ya está registrado");
-                }catch(e){
-                    guardarCliente();
+                        checkbox: checkbox.checked
+                    }  
+                )
+                let boolean = !validaSiExisteId()&&!validaSiExisteCorreo();
+                let mensaje;
+                if(validaSiExisteCorreo()){
+                    mensaje = "El usuario con correo "+correo.value+" ya está registrado";
                 }
+                if(validaSiExisteId()){
+                    mensaje = "El usuario con documento "+id.value+" ya está registrado";
+                }
+
+                boolean ? guardarCliente(): crearMensaje("userAlreadyExists","alert alert-primary", mensaje);
                 cliente.pop();
             }
             else
                 crearMensaje("mandatoryAlert","alert alert-danger","Debe completar los campos obligatorios para continuar.");
         
         }
+        function validaSiExisteId(){
+            return localStorage?.getItem(id.value)?.includes(id.value)||false;
+        }
+        function validaSiExisteCorreo(){
+            return localStorage?.getItem(correo.value)?.includes(correo.value)||false;
+        }
         function guardarCliente(){
+            localStorage.setItem(correo.value,JSON.stringify(cliente))
             localStorage.setItem(id.value,JSON.stringify(cliente));
             crearMensaje("success","alert alert-success","Formulario enviado exitosamente");
             id.value = "";
@@ -101,24 +109,12 @@ class Cliente{
         }
 
         function validarCampos(event){
-            if(event.target.value.length >=3){
-                nombre.className = "form-control";
-            }
-            if(apellido.value.length>=3){
-                apellido.className = 'form-control';
-            }
-            if(regexpEmail.test(correo.value)){
-                correo.className = 'form-control';
-            }
-            if(contrasenha.value.length>=8){
-                contrasenha.className = 'form-control';
-            }
-            if(contrasenha.value === confirmarContrasenha.value){
-                confirmarContrasenha.className = 'form-control';
-            }
-            if(id.value.length>=5){
-                id.className = 'form-control';
-            } 
+            (event.target.value.length >=3) && (nombre.className = "form-control");
+            (apellido.value.length>=3) && (apellido.className = 'form-control');
+            (regexpEmail.test(correo.value)) && (correo.className = 'form-control');
+            (contrasenha.value.length>=8) && (contrasenha.className = 'form-control');
+            (contrasenha.value === confirmarContrasenha.value) && (confirmarContrasenha.className = 'form-control');
+            (id.value.length>=5) && (id.className = 'form-control');
             if(checkbox.checked){
                 if(!document.querySelector('#checkAlert')==='null'){
                     document.querySelector('#checkAlert').remove();

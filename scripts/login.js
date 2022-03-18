@@ -7,6 +7,8 @@ linkLogin.addEventListener("click",mostrarFormulario);
 function mostrarFormulario(){
     Swal.fire({
         title: 'Inicio de sesión',
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'Sign in',
         html:
         `
             <form class="login">
@@ -28,6 +30,14 @@ function mostrarFormulario(){
                 <p class="mt-3 mb-3 text-muted">© 2022</p>
             </form>
         `
+    }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Deleted!',
+            'Your file has been deleted.',
+            'success'
+          )
+        }
     })
 }
 
