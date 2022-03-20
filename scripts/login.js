@@ -1,4 +1,3 @@
-
 const buttonLogin = document.querySelector("#login");
 const linkLogin = document.querySelector("#loginLink");
 buttonLogin.addEventListener("click",mostrarFormulario);
@@ -21,24 +20,39 @@ function mostrarFormulario(){
                     <input id="passwordLogin" type="password" class="form-control login__password" id="floatingPassword" placeholder="Password" data-dashlane-rid="fa0aa51ebcef76d6" data-kwimpalastatus="alive" data-kwimpalaid="1647566942343-1" data-form-type="password">
                     <label for="floatingPassword">Password</label>
                 </div>
-            
-                <div class="checkbox mt-3">
-                    <label data-dashlane-label="true">
-                        <input type="checkbox" value="remember-me" data-dashlane-rid="cfd9a04ac97be861" data-form-type="consent,rememberme"> Remember me
-                    </label>
-                </div>
                 <p class="mt-3 mb-3 text-muted">© 2022</p>
             </form>
         `
     }).then((result) => {
-        if (result.isConfirmed) {
-          Swal.fire(
-            'Deleted!',
-            'Your file has been deleted.',
-            'success'
-          )
+        const inputEmail = document.querySelector("#emailLogin");
+        const inputPassword = document.querySelector("#passwordLogin");
+        const emailStored = localStorage?.getItem(inputEmail.value)?.includes(inputEmail.value)||false;
+        const passwordStored = localStorage?.getItem(inputEmail.value)?.includes(inputPassword.value)||false;
+
+        if(emailStored){
+            if(passwordStored){
+                if (result.isConfirmed) {
+                    Swal.fire(
+                    'Success!',
+                    'Has iniciado sesión correctamente',
+                    'success');
+                    setTimeout(redirectDashboard,1000);
+                }     
+            }else{
+                Swal.fire(
+                    'Contraseña inválida!',
+                    'Porfavor verifique la información e intente nuevamente.'
+                ) 
+            }
+        }else{
+            Swal.fire(
+                'Correo Inválido!',
+                'Porfavor verifique la información e intente nuevamente.'
+            ) 
         }
     })
 }
 
-  
+function redirectDashboard(){
+    window.location.href = "../models/register.html";
+}  

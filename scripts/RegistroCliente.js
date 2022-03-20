@@ -25,6 +25,18 @@ class Cliente{
         this.contrasenha = contrasenha.value;
         this.confirmarContrasenha = confirmarContrasenha.value;
         this.checkbox = checkbox; 
+
+        const emailIndex = localStorage?.getItem("emailFromIndex")||false;
+        const passwordIndex = localStorage?.getItem("passwordFromIndex")||false;
+        if(emailIndex!==false){
+            correo.value = emailIndex;
+            localStorage.removeItem("emailFromIndex");
+            if(passwordIndex!== false){
+                contrasenha.value = passwordIndex;
+                localStorage.removeItem("passwordFromIndex");
+            }       
+        }
+        
         formulario.addEventListener("submit", enviarFormulario);
         formulario.addEventListener("change",validarCampos);
        
@@ -32,32 +44,14 @@ class Cliente{
         function enviarFormulario(e){
             validation = true;
             e.preventDefault();
-            if(nombre.value==''||nombre.value.length<3){
-                nombre.className = 'form-control is-invalid';
-                validation = false;
-            }
-            if(apellido.value==''||apellido.value.length<3){
-                apellido.className = 'form-control is-invalid';
-                validation = false;
-            }
-            if(correo.value==''||!regexpEmail.test(correo.value)){
-                correo.className = 'form-control is-invalid';
-                validation = false;
-            }
-            if(contrasenha.value==''||contrasenha.value.length<8){
-                contrasenha.className = 'form-control is-invalid';
-                validation = false;
-            }
-            if(confirmarContrasenha.value==''||!(contrasenha.value === confirmarContrasenha.value)){
-                confirmarContrasenha.className = 'form-control is-invalid';
-                validation = false;
-            }
-            if(id.value==''||id.value.length<5){
-                id.className = 'form-control is-invalid';
-                validation = false;
-            }
+            (nombre.value==''||nombre.value.length<3)&&(validation = invalidField(nombre));
+            (apellido.value==''||apellido.value.length<3)&&(validation = invalidField(apellido));
+            (correo.value==''||!regexpEmail.test(correo.value))&&(validation = invalidField(correo));
+            (contrasenha.value==''||contrasenha.value.length<8)&&(validation = invalidField(contrasenha));
+            (confirmarContrasenha.value==''||!(contrasenha.value === confirmarContrasenha.value))&&(validation = invalidField(confirmarContrasenha));
+            (id.value==''||id.value.length<5)&&(validation = invalidField(id));
             if(!checkbox.checked){
-                crearMensaje("checkAlert","alert alert-warning","Debe aceptar los términos y condiciones para continuar.");
+                crearMensaje("Acepta los Terminos y Condiciones","warning","Debe aceptar los términos y condiciones para continuar.");
                 validation = false;
             }     
             if(validation) {
@@ -71,22 +65,21 @@ class Cliente{
                         contrasenha: contrasenha.value,
                         checkbox: checkbox.checked
                     }  
-                )
+                );
                 let boolean = !validaSiExisteId()&&!validaSiExisteCorreo();
                 let mensaje;
-                if(validaSiExisteCorreo()){
-                    mensaje = "El usuario con correo "+correo.value+" ya está registrado";
-                }
-                if(validaSiExisteId()){
-                    mensaje = "El usuario con documento "+id.value+" ya está registrado";
-                }
-
-                boolean ? guardarCliente(): crearMensaje("userAlreadyExists","alert alert-primary", mensaje);
+                validaSiExisteCorreo() && (mensaje = "El usuario con correo "+correo.value+" ya está registrado");
+                validaSiExisteId() && (mensaje = "El usuario con documento "+id.value+" ya está registrado");
+                boolean ? guardarCliente(): crearMensaje("Usuario ya existe","info", mensaje);
                 cliente.pop();
             }
             else
-                crearMensaje("mandatoryAlert","alert alert-danger","Debe completar los campos obligatorios para continuar.");
+                crearMensaje("Diligencie todos los campos obligatorios","error","Debe completar los campos obligatorios para continuar.");
         
+        }
+        function invalidField(attrib){
+            attrib.className = 'form-control is-invalid';
+            return false;
         }
         function validaSiExisteId(){
             return localStorage?.getItem(id.value)?.includes(id.value)||false;
@@ -97,7 +90,7 @@ class Cliente{
         function guardarCliente(){
             localStorage.setItem(correo.value,JSON.stringify(cliente))
             localStorage.setItem(id.value,JSON.stringify(cliente));
-            crearMensaje("success","alert alert-success","Formulario enviado exitosamente");
+            crearMensaje("Genial!","success","Formulario enviado exitosamente");
             id.value = "";
             nombre.value = "";
             apellido.value = "";
@@ -115,21 +108,17 @@ class Cliente{
             (contrasenha.value.length>=8) && (contrasenha.className = 'form-control');
             (contrasenha.value === confirmarContrasenha.value) && (confirmarContrasenha.className = 'form-control');
             (id.value.length>=5) && (id.className = 'form-control');
-            if(checkbox.checked){
-                if(!document.querySelector('#checkAlert')==='null'){
-                    document.querySelector('#checkAlert').remove();
-                }
-            }
+            (checkbox.checked) && ((!document.querySelector('#checkAlert')==='null') && (document.querySelector('#checkAlert').remove()));
         }
 
-        function crearMensaje(idElementoHtml, className, mensaje){
-            const main = document.querySelector('main');
-            const div = document.createElement('div');
-            div.innerHTML = `<div id="${idElementoHtml}" class="${className}" role="alert">
-            ${mensaje}
-            </div>`;
-            main.prepend(div);
-            setTimeout(()=>{document.querySelector('#'+idElementoHtml).remove();},3000);
+        function crearMensaje(title,className, mensaje){
+            Swal.fire({
+                title: title,
+                text: mensaje,
+                icon: className,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Ok'
+              })
         }
     }
 
