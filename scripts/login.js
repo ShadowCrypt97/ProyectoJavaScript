@@ -1,7 +1,5 @@
 const buttonLogin = document.querySelector("#login");
-const linkLogin = document.querySelector("#loginLink");
 buttonLogin.addEventListener("click",mostrarFormulario);
-linkLogin.addEventListener("click",mostrarFormulario);
 
 function mostrarFormulario(){
     Swal.fire({
@@ -13,11 +11,11 @@ function mostrarFormulario(){
             <form class="login">
                 <img src="../images/LogoSinFondo.png" alt="" width="200" height="200">
                 <div class="form-floating login__email">
-                    <input id="emailLogin" type="email" class="form-control login__email" id="floatingInput" placeholder="name@example.com" data-dashlane-rid="eead604e5eee915d" data-kwimpalastatus="alive" data-kwimpalaid="1647566942343-2" data-form-type="email">
+                    <input [autocomplete]="username" id="emailLogin" type="email" class="form-control login__email" id="floatingInput" placeholder="name@example.com" data-dashlane-rid="eead604e5eee915d" data-kwimpalastatus="alive" data-kwimpalaid="1647566942343-2" data-form-type="email">
                     <label for="floatingInput">Email address</label>
                 </div>
                 <div class="form-floating login__password">
-                    <input id="passwordLogin" type="password" class="form-control login__password" id="floatingPassword" placeholder="Password" data-dashlane-rid="fa0aa51ebcef76d6" data-kwimpalastatus="alive" data-kwimpalaid="1647566942343-1" data-form-type="password">
+                    <input [autocomplete]="current-password" id="passwordLogin" type="password" class="form-control login__password" id="floatingPassword" placeholder="Password" data-dashlane-rid="fa0aa51ebcef76d6" data-kwimpalastatus="alive" data-kwimpalaid="1647566942343-1" data-form-type="password">
                     <label for="floatingPassword">Password</label>
                 </div>
                 <p class="mt-3 mb-3 text-muted">© 2022</p>

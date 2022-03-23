@@ -1,3 +1,8 @@
+const linkLogin = document.querySelector("#loginLink");
+
+linkLogin.addEventListener("click",mostrarFormulario);
+
+
 class Cliente{
     constructor(){
         this.id = 0;
