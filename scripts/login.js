@@ -29,13 +29,8 @@ function mostrarFormulario(){
 
         if(emailStored){
             if(passwordStored){
-                if (result.isConfirmed) {
-                    Swal.fire(
-                    'Success!',
-                    'Has iniciado sesión correctamente',
-                    'success');
-                    setTimeout(redirectDashboard,1000);
-                }     
+                result.isConfirmed && Swal.fire('Success!','Has iniciado sesión correctamente','success');
+                setTimeout(redirectDashboard,1000);   
             }else{
                 Swal.fire(
                     'Contraseña inválida!',
