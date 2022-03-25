@@ -51,6 +51,22 @@
   fill: currentColor;
 }
 
+.header__sidebar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  height: 100vh;
+  max-height: 100vh;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.header__sidebar--show {
+  display: none !important;
+}
+
 /* Color Theme Swatches in Hex */
 /* Color Theme Swatches in RGBA */
 /* Color Theme Swatches in HSLA */
