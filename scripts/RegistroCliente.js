@@ -98,10 +98,11 @@ class Cliente{
         function validaSiExisteCorreo(){
             return localStorage?.getItem(correo.value)?.includes(correo.value)||false;
         }
-        function guardarCliente(){
+        async function guardarCliente(){
             localStorage.setItem(correo.value,JSON.stringify(cliente))
             localStorage.setItem(id.value,JSON.stringify(cliente));
-            crearMensaje("Genial!","success","Formulario enviado exitosamente");
+            await crearMensaje("Genial!","success","Formulario enviado exitosamente");
+            redirectBooking("./reservas.html");
             id.value = "";
             nombre.value = "";
             apellido.value = "";
@@ -123,14 +124,13 @@ class Cliente{
         }
 
         async function crearMensaje(title,className, mensaje){
-           await Swal.fire({
+            await Swal.fire({
                 title: title,
                 text: mensaje,
                 icon: className,
                 confirmButtonColor: '#3085d6',
                 confirmButtonText: 'Ok'
-              })
-              redirectBooking("./models/reservas.html");
+            })
         }
     }
 

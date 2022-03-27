@@ -28,7 +28,7 @@ function abrirPaginaRegistro(e){
         crearMensaje("Email inválido","info", "El email debe ser un email válido [Ex: example@gmail.com]");
     
 
-    const validarCampos = ()=>{
+    function validarCampos(){
         (regexpEmail.test(emailFieldBody.value)) && (emailFieldBody.className = 'form-control');
         (passwordFieldBody.value.length>=8) && (passwordFieldBody.className = 'form-control');
     }

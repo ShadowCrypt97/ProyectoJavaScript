@@ -35,11 +35,8 @@ function mostrarFormulario(){
                 if(passwordStored){
                     (async ()=>{
                         await Swal.fire('Success!','Has iniciado sesión correctamente','success');
-                        try {
-                            redirectBooking("./models/reservas.html");
-                        } catch (error) {
-                            redirectBooking("./reservas.html");
-                        }
+                        redirectBooking("../models/reservas.html");
+
                         
                     })();
                     localStorage.setItem("actuallyLoggedIn",inputEmail.value);  
@@ -64,6 +61,6 @@ function redirectDashboard(){
     window.location.href = "../models/register.html";
 }  
 
-const redirectBooking = (path)=>{
+let redirectBooking = (path)=>{
     window.location.href = path;
 }
