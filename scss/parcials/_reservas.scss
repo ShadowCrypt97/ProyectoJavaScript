@@ -1,0 +1,11 @@
+.reservas__grid{
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: max-content auto;
+}
+
+.cards__grid{
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-template-columns: auto;
+}
