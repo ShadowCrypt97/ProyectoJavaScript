@@ -15,9 +15,6 @@ signOutBtn.addEventListener("click",()=>{
 const dataModalidad = (async ()=>{
     const response = await fetch('../data_formato_canchas.json');
     const formatos = await response.json();
-/*    formatos.forEach((elemento)=>{
-        console.log(elemento.name);
-    })*/
     return formatos;
 })();
 
