@@ -1,4 +1,10 @@
 const linkLogin = document.querySelector("#loginLink");
+const btnReservas = document.querySelector("#reservas");
+const isLoggedIn = localStorage?.getItem("actuallyLoggedIn")||false;
+
+(isLoggedIn==("false"||false)) ? btnReservas.addEventListener("click",mostrarFormulario):btnReservas.addEventListener("click",()=>{
+    btnReservas.setAttribute("href","./reservas.html");
+})
 
 linkLogin.addEventListener("click",mostrarFormulario);
 

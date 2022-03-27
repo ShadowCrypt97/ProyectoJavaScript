@@ -6,6 +6,8 @@ function mostrarFormulario(){
         title: 'Inicio de sesión',
         confirmButtonColor: '#3085d6',
         confirmButtonText: 'Sign in',
+        allowOutsideClick: false,
+        showCancelButton: true,
         html:
         `
             <form class="login">
@@ -22,15 +24,20 @@ function mostrarFormulario(){
             </form>
         `
     }).then((result) => {
-        const inputEmail = document.querySelector("#emailLogin");
-        const inputPassword = document.querySelector("#passwordLogin");
-        const emailStored = localStorage?.getItem(inputEmail.value)?.includes(inputEmail.value)||false;
-        const passwordStored = localStorage?.getItem(inputEmail.value)?.includes(inputPassword.value)||false;
+        
+        if(result.isConfirmed){
+            const inputEmail = document.querySelector("#emailLogin");
+            const inputPassword = document.querySelector("#passwordLogin");
+            const emailStored = localStorage?.getItem(inputEmail.value)?.includes(inputEmail.value)||false;
+            const passwordStored = localStorage?.getItem(inputEmail.value)?.includes(inputPassword.value)||false;
 
         if(emailStored){
             if(passwordStored){
-                result.isConfirmed && Swal.fire('Success!','Has iniciado sesión correctamente','success');
-                setTimeout(redirectDashboard,1000);   
+                (async ()=>{
+                    await Swal.fire('Success!','Has iniciado sesión correctamente','success');
+                    window.location.href = "./models/reservas.html";
+                })();
+                localStorage.setItem("actuallyLoggedIn",inputEmail.value);  
             }else{
                 Swal.fire(
                     'Contraseña inválida!',
@@ -43,6 +50,8 @@ function mostrarFormulario(){
                 'Porfavor verifique la información e intente nuevamente.'
             ) 
         }
+        }
+
     })
 }
 

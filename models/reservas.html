@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../scss/main.css">
     <title>Document</title>
 </head>
-<body>
+<body class="reservas__grid">
     <!--Symbols-->
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
         <symbol id="bootstrap" viewBox="0 0 118 94">
@@ -73,48 +73,31 @@
     <!--/Symbols-->
     <!--header-->
     <header class="header__sidebar">
-        <div id="sidebar-1" class="d-flex flex-column flex-shrink-0 text-white bg-dark" style="width: 4.5rem;">
+        <div id="sidebar-1" class="d-flex flex-column flex-shrink-0 text-white p-3 bg-dark">
             <div class="d-flex align-self-center">
                 <a href="../index.html" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none justify-self-center">
                     <img class="d-inline-block align-text-top img--size" src="../images/LogoSinFondo.png" alt="Logo">
                 </a>
             </div>
+            <hr>
             <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
-              <li class="nav-item">
-                <a href="#" class="nav-link active py-3 " aria-current="page" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Home">
-                  <svg class="bi" width="24" height="24" role="img" aria-label="Home"><use xlink:href="#home"></use></svg>
+              <li>
+                <a href="#" class="nav-link text-white" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Dashboard">
+                  <svg class="bi" width="24" height="24" role="img" aria-label="Mis Reservas"><use xlink:href="#speedometer2"></use></svg>
                 </a>
               </li>
               <li>
-                <a href="#" class="nav-link py-3 " title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Dashboard">
-                  <svg class="bi" width="24" height="24" role="img" aria-label="Dashboard"><use xlink:href="#speedometer2"></use></svg>
-                </a>
-              </li>
-              <li>
-                <a href="#" class="nav-link py-3 " title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Orders">
-                  <svg class="bi" width="24" height="24" role="img" aria-label="Orders"><use xlink:href="#table"></use></svg>
-                </a>
-              </li>
-              <li>
-                <a href="#" class="nav-link py-3" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Products">
-                  <svg class="bi" width="24" height="24" role="img" aria-label="Products"><use xlink:href="#grid"></use></svg>
-                </a>
-              </li>
-              <li>
-                <a href="#" class="nav-link py-3 " title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Customers">
-                  <svg class="bi" width="24" height="24" role="img" aria-label="Customers"><use xlink:href="#people-circle"></use></svg>
+                <a href="#" class="nav-link text-white active" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Orders">
+                  <svg class="bi" width="24" height="24" role="img" aria-label="Reservar"><use xlink:href="#table"></use></svg>
                 </a>
               </li>
             </ul>
+            <hr>
             <div class="dropdown">
-              <a href="#" class="d-flex align-items-center justify-content-center p-3 link-light text-decoration-none dropdown-toggle" id="dropdownUser3" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="https://github.com/mdo.png" alt="mdo" width="24" height="24" class="rounded-circle">
+              <a href="#" class="d-flex align-items-center justify-content-center link-light text-decoration-none dropdown-toggle" id="dropdownUser3" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
               </a>
               <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser3">
-                <li><a class="dropdown-item" href="#">New project...</a></li>
-                <li><a class="dropdown-item" href="#">Settings</a></li>
-                <li><a class="dropdown-item" href="#">Profile</a></li>
-                <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="#">Sign out</a></li>
               </ul>
             </div>
@@ -127,34 +110,16 @@
             </div>
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
-              <li class="nav-item">
-                <a href="#" class="nav-link active" aria-current="page">
-                  <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
-                  Home
-                </a>
-              </li>
               <li>
                 <a href="#" class="nav-link text-white">
                   <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
-                  Dashboard
+                  Mis reservas
                 </a>
               </li>
               <li>
-                <a href="#" class="nav-link text-white">
+                <a href="#" class="nav-link text-white active">
                   <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
-                  Orders
-                </a>
-              </li>
-              <li>
-                <a href="#" class="nav-link text-white">
-                  <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
-                  Products
-                </a>
-              </li>
-              <li>
-                <a href="#" class="nav-link text-white">
-                  <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
-                  Customers
+                  Reservar
                 </a>
               </li>
             </ul>
@@ -165,17 +130,20 @@
                     <strong>mdo</strong>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                    <li><a class="dropdown-item" href="#">New project...</a></li>
-                    <li><a class="dropdown-item" href="#">Settings</a></li>
-                    <li><a class="dropdown-item" href="#">Profile</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="#">Sign out</a></li>
+                    <li><a id="btnSignOut" class="dropdown-item" href="#">Sign out</a></li>
                 </ul>
                 </div>
           </div>
     </header>
     <!--/header-->
-     <!-- JavaScript -->
-     <script src="../scripts/reservas.js"></script>
+    <!--main-->
+    <main class="cards__grid p-4">
+      <h1>¿Que te gustaría jugar hoy?</h1>
+    </main>
+    <!--/main-->
+    <!--Bootstrap Js-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <!-- JavaScript -->
+    <script src="../scripts/reservas.js"></script>
 </body>
 </html>

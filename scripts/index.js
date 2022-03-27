@@ -3,10 +3,17 @@ const registerButtonHeader = document.querySelector("#btn__register");
 const registerButtonBody = document.querySelector("#btn_signup");
 const emailFieldBody = document.querySelector("#floatingInput");
 const passwordFieldBody = document.querySelector("#floatingPassword");
+const btnReservas = document.querySelector("#reservas");
 const regexpEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+const isLoggedIn = localStorage?.getItem("actuallyLoggedIn")||false;
+
+(isLoggedIn==("false"||false)) ? btnReservas.addEventListener("click",mostrarFormulario):btnReservas.addEventListener("click",()=>{
+    btnReservas.setAttribute("href","./models/reservas.html");
+})
 
 registerButtonHeader.addEventListener("click",redirigirRegistro);
 registerButtonBody.addEventListener("click",abrirPaginaRegistro);
+
 function abrirPaginaRegistro(e){
     e.preventDefault();
     preRegisterForm.addEventListener("change",validarCampos);
@@ -21,7 +28,7 @@ function abrirPaginaRegistro(e){
         crearMensaje("Email inválido","info", "El email debe ser un email válido [Ex: example@gmail.com]");
     
 
-    function validarCampos(){
+    const validarCampos = ()=>{
         (regexpEmail.test(emailFieldBody.value)) && (emailFieldBody.className = 'form-control');
         (passwordFieldBody.value.length>=8) && (passwordFieldBody.className = 'form-control');
     }

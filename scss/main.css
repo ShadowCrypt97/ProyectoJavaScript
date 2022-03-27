@@ -268,4 +268,23 @@
       -ms-grid-row-align: start;
       align-self: start;
 }
+
+.reservas__grid {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: auto;
+      grid-template-rows: auto;
+  -ms-grid-columns: max-content auto;
+      grid-template-columns: -webkit-max-content auto;
+      grid-template-columns: max-content auto;
+}
+
+.cards__grid {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: auto auto;
+      grid-template-rows: auto auto;
+  -ms-grid-columns: auto;
+      grid-template-columns: auto;
+}
 /*# sourceMappingURL=main.css.map */
