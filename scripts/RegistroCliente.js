@@ -122,14 +122,15 @@ class Cliente{
             (checkbox.checked) && ((!document.querySelector('#checkAlert')==='null') && (document.querySelector('#checkAlert').remove()));
         }
 
-        function crearMensaje(title,className, mensaje){
-            Swal.fire({
+        async function crearMensaje(title,className, mensaje){
+           await Swal.fire({
                 title: title,
                 text: mensaje,
                 icon: className,
                 confirmButtonColor: '#3085d6',
                 confirmButtonText: 'Ok'
               })
+              redirectBooking("./models/reservas.html");
         }
     }
 

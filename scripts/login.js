@@ -31,25 +31,30 @@ function mostrarFormulario(){
             const emailStored = localStorage?.getItem(inputEmail.value)?.includes(inputEmail.value)||false;
             const passwordStored = localStorage?.getItem(inputEmail.value)?.includes(inputPassword.value)||false;
 
-        if(emailStored){
-            if(passwordStored){
-                (async ()=>{
-                    await Swal.fire('Success!','Has iniciado sesión correctamente','success');
-                    window.location.href = "./models/reservas.html";
-                })();
-                localStorage.setItem("actuallyLoggedIn",inputEmail.value);  
+            if(emailStored){
+                if(passwordStored){
+                    (async ()=>{
+                        await Swal.fire('Success!','Has iniciado sesión correctamente','success');
+                        try {
+                            redirectBooking("./models/reservas.html");
+                        } catch (error) {
+                            redirectBooking("./reservas.html");
+                        }
+                        
+                    })();
+                    localStorage.setItem("actuallyLoggedIn",inputEmail.value);  
+                }else{
+                    Swal.fire(
+                        'Contraseña inválida!',
+                        'Porfavor verifique la información e intente nuevamente.'
+                    ) 
+                }
             }else{
                 Swal.fire(
-                    'Contraseña inválida!',
+                    'Correo Inválido!',
                     'Porfavor verifique la información e intente nuevamente.'
                 ) 
             }
-        }else{
-            Swal.fire(
-                'Correo Inválido!',
-                'Porfavor verifique la información e intente nuevamente.'
-            ) 
-        }
         }
 
     })
@@ -58,3 +63,7 @@ function mostrarFormulario(){
 function redirectDashboard(){
     window.location.href = "../models/register.html";
 }  
+
+const redirectBooking = (path)=>{
+    window.location.href = path;
+}
