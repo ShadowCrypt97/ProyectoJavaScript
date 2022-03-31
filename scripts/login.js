@@ -35,9 +35,7 @@ function mostrarFormulario(){
                 if(passwordStored){
                     (async ()=>{
                         await Swal.fire('Success!','Has iniciado sesión correctamente','success');
-                        redirectBooking("../models/reservas.html");
-
-                        
+                        redirectBooking("../models/reservas.html");                        
                     })();
                     localStorage.setItem("actuallyLoggedIn",inputEmail.value);  
                 }else{

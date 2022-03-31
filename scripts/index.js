@@ -6,8 +6,9 @@ const passwordFieldBody = document.querySelector("#floatingPassword");
 const btnReservas = document.querySelector("#reservas");
 const regexpEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 const isLoggedIn = localStorage?.getItem("actuallyLoggedIn")||false;
+const boolean = isLoggedIn=="false"||isLoggedIn == false;
 
-(isLoggedIn==("false"||false)) ? btnReservas.addEventListener("click",mostrarFormulario):btnReservas.addEventListener("click",()=>{
+(boolean) ? btnReservas.addEventListener("click",mostrarFormulario):btnReservas.addEventListener("click",()=>{
     btnReservas.setAttribute("href","./models/reservas.html");
 })
 

@@ -2,7 +2,7 @@ const linkLogin = document.querySelector("#loginLink");
 const btnReservas = document.querySelector("#reservas");
 const isLoggedIn = localStorage?.getItem("actuallyLoggedIn")||false;
 
-(isLoggedIn==("false"||false)) ? btnReservas.addEventListener("click",mostrarFormulario):btnReservas.addEventListener("click",()=>{
+(isLoggedIn=="false"||isLoggedIn==false) ? btnReservas.addEventListener("click",mostrarFormulario):btnReservas.addEventListener("click",()=>{
     btnReservas.setAttribute("href","./reservas.html");
 })
 
@@ -102,6 +102,7 @@ class Cliente{
             localStorage.setItem(correo.value,JSON.stringify(cliente))
             localStorage.setItem(id.value,JSON.stringify(cliente));
             await crearMensaje("Genial!","success","Formulario enviado exitosamente");
+            localStorage.setItem("actuallyLoggedIn",correo.value);
             redirectBooking("./reservas.html");
             id.value = "";
             nombre.value = "";

@@ -4,6 +4,12 @@
     grid-template-columns: max-content auto;
 }
 
+.reservas__agendamiento{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
 .cards__grid{
     display: grid;
     grid-template-rows: auto auto;
