@@ -1,0 +1,119 @@
+[
+    {
+        "Bogotá": [
+            {
+              "id": 1,
+              "name": "5 Site Fútbol Occidente",
+              "dirección": "Cra. 114a #78-85, Bogotá, Cundinamarca",
+              "coordenadas": "4.7221738741074955, -74.12218242066164",
+              "telefono": "3113403434"
+            },
+            {
+              "id": 2,
+              "name": "Divergrama Occidente",
+              "dirección": "Av. Calle 72 # 112 a 01, Bogotá",
+              "coordenadas": "4.712389018843291, -74.12743288225323",
+              "telefono": "3102563434"
+            },
+            {
+              "id": 3,
+              "name": "CANCHAS SINTETICAS GREMIO FC",
+              "dirección": "Calle 63, Cra. 105h #30, Bogotá",
+              "coordenadas": "4.698328093308599, -74.12880448225323",
+              "telefono": "3132703794"
+            }
+        ],
+        "Cali": [
+            {
+              "id": 1,
+              "name": "Canchas Sintéticas",
+              "dirección": "a 1a 4a-110, Cl. 70a #1a4, Cali, Palmira, Valle del Cauca",
+              "coordenadas": "3.485872226165452, -76.49105254690737",
+              "telefono": "3122733536"
+            },
+            {
+              "id": 2,
+              "name": "Canchas Sintéticas Bernabeu",
+              "dirección": "Cra. 5 ###52, Cali, Valle del Cauca",
+              "coordenadas": "3.4788312757560336, -76.5056991233686",
+              "telefono": "3151236434"
+            },
+            {
+              "id": 3,
+              "name": "Canchas Sintéticas La Bombonera Futgol 5",
+              "dirección": "Cra. 5 ###52, Cali, Valle del Cauca",
+              "coordenadas": "3.4788941915147498, -76.50598410805328",
+              "telefono": "3172203334"
+            }
+        ],
+        "Medellín": [
+            {
+              "id": 0,
+              "name": "Canchas Sintéticas La Bombonera Futgol 5",
+              "dirección": "Cra. 5 ###52, Cali, Valle del Cauca",
+              "coordenadas": "3.4788941915147498, -76.50598410805328",
+              "telefono": "3182789034"
+            },
+            {
+              "id": 1,
+              "name": "Canchas Sintéticas La Bombonera Futgol 5",
+              "dirección": "Cra. 5 ###52, Cali, Valle del Cauca",
+              "coordenadas": "3.4788941915147498, -76.50598410805328",
+              "telefono": "3203563478"
+            },
+            {
+              "id": 2,
+              "name": "Canchas Sintéticas La Bombonera Futgol 5",
+              "dirección": "Cra. 5 ###52, Cali, Valle del Cauca",
+              "coordenadas": "3.4788941915147498, -76.50598410805328",
+              "telefono": "3112235434"
+            }
+        ],
+        "Villavicencio": [
+            {
+              "id": 0,
+              "name": "Canchas Sintéticas La Bombonera Futgol 5",
+              "dirección": "Cra. 5 ###52, Cali, Valle del Cauca",
+              "coordenadas": "3.4788941915147498, -76.50598410805328",
+              "telefono": "3142712434"
+            },
+            {
+              "id": 1,
+              "name": "Canchas Sintéticas La Bombonera Futgol 5",
+              "dirección": "Cra. 5 ###52, Cali, Valle del Cauca",
+              "coordenadas": "3.4788941915147498, -76.50598410805328",
+              "telefono": "3212731155"
+            },
+            {
+              "id": 2,
+              "name": "Canchas Sintéticas La Bombonera Futgol 5",
+              "dirección": "Cra. 5 ###52, Cali, Valle del Cauca",
+              "coordenadas": "3.4788941915147498, -76.50598410805328",
+              "telefono": "3152435732"
+            }
+        ],
+        "Zipaquirá": [
+            {
+              "id": 0,
+              "name": "Canchas Sintéticas La Bombonera Futgol 5",
+              "dirección": "Cra. 5 ###52, Cali, Valle del Cauca",
+              "coordenadas": "3.4788941915147498, -76.50598410805328",
+              "telefono": "3104322156"
+            },
+            {
+              "id": 1,
+              "name": "Canchas Sintéticas La Bombonera Futgol 5",
+              "dirección": "Cra. 5 ###52, Cali, Valle del Cauca",
+              "coordenadas": "3.4788941915147498, -76.50598410805328",
+              "telefono": "3145676545"
+            },
+            {
+              "id": 2,
+              "name": "Canchas Sintéticas La Bombonera Futgol 5",
+              "dirección": "Cra. 5 ###52, Cali, Valle del Cauca",
+              "coordenadas": "3.4788941915147498, -76.50598410805328",
+              "telefono": "3156784213"
+            }
+        ]
+    }
+]

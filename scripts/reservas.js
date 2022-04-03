@@ -6,6 +6,8 @@ const card =document.createElement("div");
 const userName = document.querySelector("#name");
 const correo = localStorage.getItem("actuallyLoggedIn");
 const userData = JSON.parse(localStorage.getItem(correo));
+var DateTime = luxon.DateTime;
+DateTime.now().setZone("system");
 
 userData.forEach((el)=>{
     userName.innerText = el.nombre +" "+el.apellido;
@@ -23,6 +25,12 @@ signOutBtn.addEventListener("click",()=>{
 
 const dataModalidad = (async ()=>{
     const response = await fetch('../data_formato_canchas.json');
+    const formatos = await response.json();
+    return formatos;
+})();
+
+const dataCanchas = (async ()=>{
+    const response = await fetch('../data_canchas_por_ciudad.json');
     const formatos = await response.json();
     return formatos;
 })();
@@ -67,15 +75,40 @@ function borrarMain(){
 }
 
 function paginaAgendamiento(){
-    const calendario = document.createElement("div");
-    calendario.classList.add("input-group","mb-3");
+    const seleccionarFechayHora = document.createElement("div");
+    seleccionarFechayHora.classList.add("input-group","mb-3","gap-3");
     localStorage.setItem("page",2);
     borrarMain();
     main.className = "reservas__agendamiento p-4";
-    calendario.innerHTML = `
-        <input id="dateInput" type="text" class="form-control" placeholder="Selecciona una fecha de reserva..." aria-label="Username" aria-describedby="basic-addon1">
-        <span id="dateCalendar" class="input-group-text" id="basic-addon1"><svg class="bi" width="24" height="24" role="img" aria-label="Reservar"><use xlink:href="#calendar3"></use></svg></span>`
-    main.appendChild(calendario);    
+    seleccionarFechayHora.innerHTML = `
+    <div class="input-group">
+        <input id="dateInput" type="text" class="form-control " placeholder="Selecciona una fecha de reserva..." aria-label="Username" aria-describedby="basic-addon1" disabled readonly>
+        <span id="dateCalendar" class="input-group-text" id="basic-addon1"><svg class="bi" width="24" height="24" role="img" aria-label="Reservar"><use xlink:href="#calendar3"></use></svg></span>
+    </div>
+    <div class="input-group">
+        <select class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon">
+            <option selected>Selecciona una hora...</option>
+            <option id="1" value="1">7:00 AM</option>
+            <option id="2" value="2">8:00 AM</option>
+            <option id="3" value="3">9:00 AM</option>
+            <option id="4" value="4">10:00 AM</option>
+            <option id="5" value="5">11:00 AM</option>
+            <option id="6" value="6">12:00 PM</option>
+            <option id="7" value="7">1:00 PM</option>
+            <option id="8" value="8">2:00 PM</option>
+            <option id="9" value="9">3:00 PM</option>
+            <option id="10" value="10">4:00 PM</option>
+            <option id="11" value="11">5:00 PM</option>
+            <option id="12" value="12">6:00 PM</option>
+            <option id="13" value="13">7:00 PM</option>
+            <option id="14" value="14">8:00 PM</option>
+            <option id="15" value="15">9:00 PM</option>
+            <option id="16" value="16">10:00 PM</option>
+        </select>
+    </div>
+    `
+    main.appendChild(seleccionarFechayHora);
+
     $('#dateCalendar').dateDropper({
         large: true,
         largeOnly: true,
@@ -83,11 +116,14 @@ function paginaAgendamiento(){
         modal: true,
         lock: 'from',
         onChange: function (res) {
-            document.querySelector("#dateInput").setAttribute("placeholder",'La fecha seleccionada es '+ res.date.l+ ' ' + res.date.d + ' de ' +res.date.F +' del '+res.date.Y);
+            document.querySelector("#dateInput").removeAttribute("disabled readonly");
+            document.querySelector("#dateInput").setAttribute("value",'La fecha seleccionada es '+ res.date.l+ ' ' + res.date.d + ' de ' +res.date.F +' del '+res.date.Y);
         }
     });
 }
-
+function showHoursInSelect(){
+    DateTime.now().hour
+}
 function seleccionarModoDeJuego(e){
     let modoSeleccionado;
     modoSeleccionado = e.target;
