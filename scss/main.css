@@ -73,6 +73,9 @@
   max-height: 100vh;
   overflow-x: auto;
   overflow-y: hidden;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
 }
 
 .header__sidebar--show {

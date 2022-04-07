@@ -25,14 +25,20 @@ signOutBtn.addEventListener("click",()=>{
 
 const dataModalidad = (async ()=>{
     const response = await fetch('../data_formato_canchas.json');
-    const formatos = await response.json();
-    return formatos;
+    const data = await response.json();
+    return data;
 })();
 
 const dataCanchas = (async ()=>{
     const response = await fetch('../data_canchas_por_ciudad.json');
-    const formatos = await response.json();
-    return formatos;
+    const data = await response.json();
+    return data;
+})();
+
+const horarioServicio = (async ()=>{
+    const response = await fetch('../horas_servicio.json');
+    const data = await response.json();
+    return data;
 })();
 
 const createPageModalidad = (async ()=>{
@@ -74,12 +80,21 @@ function borrarMain(){
     main.innerHTML = `<h1>Selecciona la fecha y hora del partido</h1>`;
 }
 
-function paginaAgendamiento(){
+
+function paginaAgendamiento(data){
+    const idHorarios = [];
+    const horasServicio = [];
     const seleccionarFechayHora = document.createElement("div");
+    const cantidadElementos = Object.keys(data).length;
     seleccionarFechayHora.classList.add("input-group","mb-3","gap-3");
     localStorage.setItem("page",2);
     borrarMain();
     main.className = "reservas__agendamiento p-4";
+    data.forEach((el)=>{
+        idHorarios.push(el.id);
+        horasServicio.push(el.hora);
+    });
+
     seleccionarFechayHora.innerHTML = `
     <div class="input-group">
         <input id="dateInput" type="text" class="form-control " placeholder="Selecciona una fecha de reserva..." aria-label="Username" aria-describedby="basic-addon1" disabled readonly>
@@ -88,26 +103,18 @@ function paginaAgendamiento(){
     <div class="input-group">
         <select class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon">
             <option selected>Selecciona una hora...</option>
-            <option id="1" value="1">7:00 AM</option>
-            <option id="2" value="2">8:00 AM</option>
-            <option id="3" value="3">9:00 AM</option>
-            <option id="4" value="4">10:00 AM</option>
-            <option id="5" value="5">11:00 AM</option>
-            <option id="6" value="6">12:00 PM</option>
-            <option id="7" value="7">1:00 PM</option>
-            <option id="8" value="8">2:00 PM</option>
-            <option id="9" value="9">3:00 PM</option>
-            <option id="10" value="10">4:00 PM</option>
-            <option id="11" value="11">5:00 PM</option>
-            <option id="12" value="12">6:00 PM</option>
-            <option id="13" value="13">7:00 PM</option>
-            <option id="14" value="14">8:00 PM</option>
-            <option id="15" value="15">9:00 PM</option>
-            <option id="16" value="16">10:00 PM</option>
         </select>
     </div>
     `
     main.appendChild(seleccionarFechayHora);
+    const listaHorarios = document.querySelector("#inputGroupSelect04");
+    for(let i=0;i<cantidadElementos;i++){
+        const opcionesHorario = document.createElement("option");
+        opcionesHorario.setAttribute("id",idHorarios[i]);
+        opcionesHorario.innerText = `${horasServicio[i]}`;
+        listaHorarios.appendChild(opcionesHorario);
+    }
+
 
     $('#dateCalendar').dateDropper({
         large: true,
@@ -124,11 +131,92 @@ function paginaAgendamiento(){
 function showHoursInSelect(){
     DateTime.now().hour
 }
-function seleccionarModoDeJuego(e){
+
+function mostrarCanchas(){
+    const BD =
+    [
+        {
+            id: 1,
+            nombre_cancha: 'GramaF6',
+            ubicacion: 'Carrera 123#32-34',
+            formato: '7',
+            precio_hora: '100000',
+            url_img: "http://"
+        },
+        {
+            id: 2,
+            nombre_cancha: 'FutSite5',
+            ubicacion: 'Carrera 56#37-12',
+            formato: '5',
+            precio_hora: '80000',
+            url_img: "http://"
+        },
+        {
+            id: 3,
+            nombre_cancha: 'Fut11',
+            ubicacion: 'Calle 100#15-23',
+            formato: '11',
+            precio_hora: '120000',
+            url_img: "http://"
+        },
+        {
+            id: 4,
+            nombre_cancha: 'GramaF6',
+            ubicacion: 'Carrera 123#32-34',
+            formato: '11',
+            precio_hora: '150000',
+            url_img: "http://"
+        }
+    ]
+
+    const pedirCanchas= () =>{
+        return new Promise((resolve,reject)=>{
+            setTimeout(()=>{
+                resolve(BD);
+            },3000);
+        });
+    }
+
+    let canchas = []
+    const renderCanchas = array =>{
+        for(const el of array){
+            let card = document.createElement("div");
+            card.classList.add("card");
+            card.setAttribute("style","width: 18rem;")
+            card.innerHTML = 
+            `
+                <img src="${el.url_img}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">${el.nombre_cancha}</h5>
+                    <p class="card-text">
+                        Ubicación: ${el.ubicacion}<br>
+                        Tamaño de la cancha: ${el.formato}<br>
+                        precio/hora: ${el.precio_hora}
+                    </p>
+                    <a href="#" class="btn btn-primary">Ver mas</a>
+                </div>
+            `;
+            main.append(card);
+        }
+    }
+
+    canchas = [...BD];
+    pedirCanchas()
+    .then(
+        renderCanchas(canchas)
+    )
+    .catch( error =>{
+            console.log(error)
+        }  
+    )
+}
+
+async function seleccionarModoDeJuego(e){
+    const data = await horarioServicio;
     let modoSeleccionado;
     modoSeleccionado = e.target;
     localStorage.setItem("modoSeleccionado", modoSeleccionado.innerText);
-    paginaAgendamiento();
+    paginaAgendamiento(data);
 }
 
 function mostrarSidebarExpandida(){
