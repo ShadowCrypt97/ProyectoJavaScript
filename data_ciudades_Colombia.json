@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "ciudad": "Bogotá"
+    },
+    {
+        "id": 2,
+        "ciudad": "Cali"
+    },
+    {
+        "id": 3,
+        "ciudad": "Medellín"
+    },
+    {
+        "id": 4,
+        "ciudad": "Villavicencio"
+    },
+    {
+        "id": 5,
+        "ciudad": "Zipaquirá"
+    },
+    {
+        "id": 0,
+        "ciudad": "Mostrar Todas"
+    }
+]

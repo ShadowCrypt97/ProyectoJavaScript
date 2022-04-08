@@ -8,6 +8,11 @@ const correo = localStorage.getItem("actuallyLoggedIn");
 const userData = JSON.parse(localStorage.getItem(correo));
 var DateTime = luxon.DateTime;
 DateTime.now().setZone("system");
+/************CONSTANTES*************/
+const JSON_FORMATO_CANCHAS = "../data_formato_canchas.json";
+const JSON_CANCHAS_POR_CIUDAD = "../data_canchas_por_ciudad.json";
+const JSON_HORAS_SERVICIO = "../horas_servicio.json";
+const JSON_CIUDADES_COLOMBIA = "../data_ciudades_Colombia.json";
 
 userData.forEach((el)=>{
     userName.innerText = el.nombre +" "+el.apellido;
@@ -23,27 +28,15 @@ signOutBtn.addEventListener("click",()=>{
     signOutBtn.setAttribute("href","../index.html");
 })
 
-const dataModalidad = (async ()=>{
-    const response = await fetch('../data_formato_canchas.json');
+async function getData(jsonPath){
+    const response = await fetch(jsonPath);
     const data = await response.json();
     return data;
-})();
-
-const dataCanchas = (async ()=>{
-    const response = await fetch('../data_canchas_por_ciudad.json');
-    const data = await response.json();
-    return data;
-})();
-
-const horarioServicio = (async ()=>{
-    const response = await fetch('../horas_servicio.json');
-    const data = await response.json();
-    return data;
-})();
+}
 
 const createPageModalidad = (async ()=>{
     localStorage.setItem("page",1);
-    const data = await dataModalidad;
+    const data = await getData(JSON_FORMATO_CANCHAS);
     const cantidadElementos = Object.keys(data).length;
     let cont = 1;
     for(let i=0;i<cantidadElementos;i++){
@@ -81,19 +74,32 @@ function borrarMain(){
 }
 
 
-function paginaAgendamiento(data){
+function paginaAgendamiento(dataHorarios, dataCanchas){
     const idHorarios = [];
     const horasServicio = [];
+    const idCiudades = [];
+    const nombreCiudades = [];
     const seleccionarFechayHora = document.createElement("div");
-    const cantidadElementos = Object.keys(data).length;
+    const seleccionarCiudad = document.createElement("div");
+    const searchBtn = document.createElement("button");
+    const cantidadHorarios = Object.keys(dataHorarios).length;
+    const cantidadCiudades = Object.keys(dataCanchas).length;
+    seleccionarCiudad.classList.add("input-group");
     seleccionarFechayHora.classList.add("input-group","mb-3","gap-3");
+    searchBtn.setAttribute("type","button");
+    searchBtn.classList.add("btn","btn-primary","mt-3");
     localStorage.setItem("page",2);
     borrarMain();
     main.className = "reservas__agendamiento p-4";
-    data.forEach((el)=>{
+    dataHorarios.forEach((el)=>{
         idHorarios.push(el.id);
         horasServicio.push(el.hora);
     });
+
+    dataCanchas.forEach((el)=>{
+        idCiudades.push(el.id);
+        nombreCiudades.push(el.ciudad);
+    })
 
     seleccionarFechayHora.innerHTML = `
     <div class="input-group">
@@ -101,20 +107,28 @@ function paginaAgendamiento(data){
         <span id="dateCalendar" class="input-group-text" id="basic-addon1"><svg class="bi" width="24" height="24" role="img" aria-label="Reservar"><use xlink:href="#calendar3"></use></svg></span>
     </div>
     <div class="input-group">
-        <select class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon">
+        <select class="form-select" id="selectHour" aria-label="Example select with button addon">
             <option selected>Selecciona una hora...</option>
         </select>
     </div>
-    `
-    main.appendChild(seleccionarFechayHora);
-    const listaHorarios = document.querySelector("#inputGroupSelect04");
-    for(let i=0;i<cantidadElementos;i++){
-        const opcionesHorario = document.createElement("option");
-        opcionesHorario.setAttribute("id",idHorarios[i]);
-        opcionesHorario.innerText = `${horasServicio[i]}`;
-        listaHorarios.appendChild(opcionesHorario);
-    }
+    `;
 
+    seleccionarCiudad.innerHTML = `        
+        <select class="form-select" id="selectCity" aria-label="Example select with button addon">
+        <option selected>Seleccionar ciudad...</option>
+        </select>
+    `;
+
+    searchBtn.innerText = "Buscar";
+
+    main.appendChild(seleccionarFechayHora);
+    main.appendChild(seleccionarCiudad);
+    main.appendChild(searchBtn);
+    const listaHorarios = document.querySelector("#selectHour");
+    const listaCiudades = document.querySelector("#selectCity");
+
+    crearListaOptionsHtml(cantidadCiudades,idCiudades,nombreCiudades,listaCiudades);
+    crearListaOptionsHtml(cantidadHorarios,idHorarios,horasServicio,listaHorarios);
 
     $('#dateCalendar').dateDropper({
         large: true,
@@ -127,6 +141,15 @@ function paginaAgendamiento(data){
             document.querySelector("#dateInput").setAttribute("value",'La fecha seleccionada es '+ res.date.l+ ' ' + res.date.d + ' de ' +res.date.F +' del '+res.date.Y);
         }
     });
+}
+
+function crearListaOptionsHtml(cantidadElementos,idElemento = [],valorElemento= [],lista){
+    for(let i=0;i<cantidadElementos;i++){
+        const opciones = document.createElement("option");
+        opciones.setAttribute("id",idElemento[i]);
+        opciones.innerText = `${valorElemento[i]}`;
+        lista.appendChild(opciones);
+    }
 }
 function showHoursInSelect(){
     DateTime.now().hour
@@ -212,11 +235,12 @@ function mostrarCanchas(){
 }
 
 async function seleccionarModoDeJuego(e){
-    const data = await horarioServicio;
+    const dataHorarios = await getData(JSON_HORAS_SERVICIO);
+    const dataCanchas = await getData(JSON_CIUDADES_COLOMBIA);
     let modoSeleccionado;
     modoSeleccionado = e.target;
     localStorage.setItem("modoSeleccionado", modoSeleccionado.innerText);
-    paginaAgendamiento(data);
+    paginaAgendamiento(dataHorarios, dataCanchas);
 }
 
 function mostrarSidebarExpandida(){
