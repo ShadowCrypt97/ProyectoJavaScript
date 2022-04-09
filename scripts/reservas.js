@@ -84,13 +84,15 @@ function paginaAgendamiento(dataHorarios, dataCanchas){
     const searchBtn = document.createElement("button");
     const cantidadHorarios = Object.keys(dataHorarios).length;
     const cantidadCiudades = Object.keys(dataCanchas).length;
+    searchBtn.addEventListener("click",renderTarjetasCanchas);
     seleccionarCiudad.classList.add("input-group");
     seleccionarFechayHora.classList.add("input-group","mb-3","gap-3");
     searchBtn.setAttribute("type","button");
-    searchBtn.classList.add("btn","btn-primary","mt-3");
+    searchBtn.classList.add("btn","btn-primary","mt-3","mb-3");
     localStorage.setItem("page",2);
     borrarMain();
-    main.className = "reservas__agendamiento p-4";
+    main.className = "p-4";
+
     dataHorarios.forEach((el)=>{
         idHorarios.push(el.id);
         horasServicio.push(el.hora);
@@ -102,21 +104,25 @@ function paginaAgendamiento(dataHorarios, dataCanchas){
     })
 
     seleccionarFechayHora.innerHTML = `
-    <div class="input-group">
-        <input id="dateInput" type="text" class="form-control " placeholder="Selecciona una fecha de reserva..." aria-label="Username" aria-describedby="basic-addon1" disabled readonly>
-        <span id="dateCalendar" class="input-group-text" id="basic-addon1"><svg class="bi" width="24" height="24" role="img" aria-label="Reservar"><use xlink:href="#calendar3"></use></svg></span>
-    </div>
-    <div class="input-group">
-        <select class="form-select" id="selectHour" aria-label="Example select with button addon">
-            <option selected>Selecciona una hora...</option>
-        </select>
-    </div>
+        <div class="reservas__agendamiento">
+            <div class="input-group">
+                <input id="dateInput" type="text" class="form-control " placeholder="Selecciona una fecha de reserva..." aria-label="Username" aria-describedby="basic-addon1" disabled readonly>
+                <span id="dateCalendar" class="input-group-text" id="basic-addon1"><svg class="bi" width="24" height="24" role="img" aria-label="Reservar"><use xlink:href="#calendar3"></use></svg></span>
+            </div>
+            <div class="input-group mt-3">
+                <select class="form-select" id="selectHour" aria-label="Example select with button addon">
+                    <option selected>Selecciona una hora...</option>
+                </select>
+            </div>
+        </div>
     `;
 
-    seleccionarCiudad.innerHTML = `        
-        <select class="form-select" id="selectCity" aria-label="Example select with button addon">
-        <option selected>Seleccionar ciudad...</option>
-        </select>
+    seleccionarCiudad.innerHTML = `
+        <div class="reservas__agendamiento">      
+            <select class="form-select" id="selectCity" aria-label="Example select with button addon">
+            <option selected>Seleccionar ciudad...</option>
+            </select>
+        </div>
     `;
 
     searchBtn.innerText = "Buscar";
@@ -141,6 +147,40 @@ function paginaAgendamiento(dataHorarios, dataCanchas){
             document.querySelector("#dateInput").setAttribute("value",'La fecha seleccionada es '+ res.date.l+ ' ' + res.date.d + ' de ' +res.date.F +' del '+res.date.Y);
         }
     });
+}
+
+const dataCanchasXCiudad = async ()=>{
+    const data = getData(JSON_CANCHAS_POR_CIUDAD);
+    return data;
+}
+
+function renderTarjetasCanchas(){
+    const cantidadCanchas = Object.keys(dataCanchasXCiudad()).length;
+    console.log(cantidadCanchas);
+    const gridCards = document.createElement("div");
+    gridCards.className = "row row-cols-1 row-cols-md-2 g-4";
+    for(let i=0;i<4; i++){
+        gridCards.appendChild(crearTarjeta(1,"Bogotá","Cra 107#80A-69", "../images/futbol-11.jpg"));
+    };
+    main.appendChild(gridCards);
+}
+
+function crearTarjeta(canchaId, title, direccion, source_img){
+    const card = document.createElement("div");
+    card.className = "col";
+    card.innerHTML = 
+    `
+        <div class="card">
+            <img id="img${canchaId}" src="${source_img}" class="card-img-top" alt="cancha ${canchaId}">
+            <div class="card-body">
+                <h5 id="title${canchaId}" class="card-title">${title}</h5>
+                <p class="card-text">${direccion}</p>
+                <a href="../models/cancha.html" class="btn btn-primary">Ver Cancha</a>
+            </div>
+        </div>
+    `;
+
+    return card;
 }
 
 function crearListaOptionsHtml(cantidadElementos,idElemento = [],valorElemento= [],lista){
