@@ -1,7 +1,7 @@
 [
     {
         "id": 1,
-        "ciudad": "Bogotá"
+        "ciudad": "Bogota"
     },
     {
         "id": 2,
@@ -9,15 +9,7 @@
     },
     {
         "id": 3,
-        "ciudad": "Medellín"
-    },
-    {
-        "id": 4,
-        "ciudad": "Villavicencio"
-    },
-    {
-        "id": 5,
-        "ciudad": "Zipaquirá"
+        "ciudad": "Medellin"
     },
     {
         "id": 0,

@@ -84,7 +84,7 @@ function paginaAgendamiento(dataHorarios, dataCanchas){
     const searchBtn = document.createElement("button");
     const cantidadHorarios = Object.keys(dataHorarios).length;
     const cantidadCiudades = Object.keys(dataCanchas).length;
-    searchBtn.addEventListener("click",renderTarjetasCanchas);
+    searchBtn.addEventListener("click", dataCanchasBogota);
     seleccionarCiudad.classList.add("input-group");
     seleccionarFechayHora.classList.add("input-group","mb-3","gap-3");
     searchBtn.setAttribute("type","button");
@@ -149,18 +149,25 @@ function paginaAgendamiento(dataHorarios, dataCanchas){
     });
 }
 
-const dataCanchasXCiudad = async ()=>{
-    const data = getData(JSON_CANCHAS_POR_CIUDAD);
-    return data;
+async function dataCanchasBogota(){
+    const data = await getData(JSON_CANCHAS_POR_CIUDAD);
+    renderTarjetasCanchas(data);
 }
 
-function renderTarjetasCanchas(){
-    const cantidadCanchas = Object.keys(dataCanchasXCiudad()).length;
-    console.log(cantidadCanchas);
+function renderTarjetasCanchas(data){
     const gridCards = document.createElement("div");
-    gridCards.className = "row row-cols-1 row-cols-md-2 g-4";
-    for(let i=0;i<4; i++){
-        gridCards.appendChild(crearTarjeta(1,"Bogotá","Cra 107#80A-69", "../images/futbol-11.jpg"));
+    const canchasId = [];
+    const direcciones = [];
+    data.forEach((array)=>{
+        let canchas = array.Bogota;
+        console.log(JSON.stringify(canchas));
+        canchas.forEach((el)=>{
+            gridCards.appendChild(crearTarjeta(el.id,"Bogotá",el.direccion, "../images/futbol-11.jpg"));
+        });
+    });
+    gridCards.className = "row row-cols-1 row-cols-md-3 g-4";
+    for(let i=0;i<Object.keys(data).length; i++){
+       
     };
     main.appendChild(gridCards);
 }
