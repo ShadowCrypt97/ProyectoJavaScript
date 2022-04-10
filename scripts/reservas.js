@@ -74,7 +74,7 @@ function borrarMain(){
 }
 
 
-function paginaAgendamiento(dataHorarios, dataCanchas){
+function paginaAgendamiento(dataHorarios, dataCiudades){
     const idHorarios = [];
     const horasServicio = [];
     const idCiudades = [];
@@ -83,8 +83,8 @@ function paginaAgendamiento(dataHorarios, dataCanchas){
     const seleccionarCiudad = document.createElement("div");
     const searchBtn = document.createElement("button");
     const cantidadHorarios = Object.keys(dataHorarios).length;
-    const cantidadCiudades = Object.keys(dataCanchas).length;
-    searchBtn.addEventListener("click", dataCanchasBogota);
+    const cantidadCiudades = Object.keys(dataCiudades).length;
+    searchBtn.addEventListener("click", dataCanchas);
     seleccionarCiudad.classList.add("input-group");
     seleccionarFechayHora.classList.add("input-group","mb-3","gap-3");
     searchBtn.setAttribute("type","button");
@@ -98,7 +98,7 @@ function paginaAgendamiento(dataHorarios, dataCanchas){
         horasServicio.push(el.hora);
     });
 
-    dataCanchas.forEach((el)=>{
+    dataCiudades.forEach((el)=>{
         idCiudades.push(el.id);
         nombreCiudades.push(el.ciudad);
     })
@@ -149,27 +149,71 @@ function paginaAgendamiento(dataHorarios, dataCanchas){
     });
 }
 
-async function dataCanchasBogota(){
+async function dataCanchas(){
     const data = await getData(JSON_CANCHAS_POR_CIUDAD);
-    renderTarjetasCanchas(data);
+    const dataCiudades = await getData(JSON_CIUDADES_COLOMBIA);
+    renderTarjetasCanchas(data, dataCiudades);
 }
 
-function renderTarjetasCanchas(data){
+function renderTarjetasCanchas(data, dataCiudades){
+    const selectCity = document.querySelector("#selectCity");
+    const dateField = document.querySelector("#dateInput");
+    const hourField = document.querySelector("#selectHour");
     const gridCards = document.createElement("div");
-    const canchasId = [];
-    const direcciones = [];
-    data.forEach((array)=>{
-        let canchas = array.Bogota;
-        console.log(JSON.stringify(canchas));
-        canchas.forEach((el)=>{
-            gridCards.appendChild(crearTarjeta(el.id,"Bogotá",el.direccion, "../images/futbol-11.jpg"));
-        });
-    });
-    gridCards.className = "row row-cols-1 row-cols-md-3 g-4";
-    for(let i=0;i<Object.keys(data).length; i++){
-       
-    };
-    main.appendChild(gridCards);
+    gridCards.setAttribute("id","gridCards");
+    const optionCity = selectCity.options[selectCity.selectedIndex].text;
+    const inputDate = dateField.value;
+    const optionhour = hourField.options[hourField.selectedIndex].text;
+    
+    if(inputDate!="" && optionhour != "Selecciona una hora..."){
+        if(optionCity == dataCiudades[0].ciudad){
+            for(const el of data[0]){
+                const card = crearTarjeta(el.id,el.name,el.direccion,"../images/futbol-11.jpg");
+                document?.querySelector("#gridCards")?.remove()||gridCards.appendChild(card);
+            } 
+        }
+        else if(optionCity == dataCiudades[1].ciudad)
+        {
+            for(const el of data[1]){
+                const card = crearTarjeta(el.id,el.name,el.direccion,"../images/futbol-7.jpg");
+                document?.querySelector("#gridCards")?.remove()||gridCards.appendChild(card);
+            } 
+        }
+        else if(optionCity == dataCiudades[2].ciudad){
+            for(const el of data[2]){
+                const card = crearTarjeta(el.id,el.name,el.direccion,"../images/futbol-9.jpg");
+                document?.querySelector("#gridCards")?.remove()||gridCards.appendChild(card);
+            } 
+        }
+        else if(optionCity == dataCiudades[3].ciudad){
+            for(const el of data[0]){
+                const card = crearTarjeta(el.id,el.name,el.direccion,"../images/futbol-11.jpg");
+                document?.querySelector("#gridCards")?.remove()||gridCards.appendChild(card);
+            } 
+            for(const el of data[1]){
+                const card = crearTarjeta(el.id,el.name,el.direccion,"../images/futbol-7.jpg");
+                document?.querySelector("#gridCards")?.remove()||gridCards.appendChild(card);
+            } 
+            for(const el of data[2]){
+                const card = crearTarjeta(el.id,el.name,el.direccion,"../images/futbol-9.jpg");
+                document?.querySelector("#gridCards")?.remove()||gridCards.appendChild(card);
+            } 
+        }
+        else
+            Swal.fire(  
+                'Selecciona una opción',
+                'Debes seleccionar alguna ciudad',
+                'error'
+            )
+        gridCards.className = "row row-cols-1 row-cols-md-3 g-4";
+        main.appendChild(gridCards);
+    }
+    else
+        Swal.fire(  
+            'Lo campos de fecha y hora son obligatorios',
+            'Debes seleccionar una fecha y una hora para reservar la cancha',
+            'error'
+        )
 }
 
 function crearTarjeta(canchaId, title, direccion, source_img){
@@ -182,7 +226,7 @@ function crearTarjeta(canchaId, title, direccion, source_img){
             <div class="card-body">
                 <h5 id="title${canchaId}" class="card-title">${title}</h5>
                 <p class="card-text">${direccion}</p>
-                <a href="../models/cancha.html" class="btn btn-primary">Ver Cancha</a>
+                <a id="" href="#" class="btn btn-primary">Ver Cancha</a>
             </div>
         </div>
     `;
@@ -201,93 +245,13 @@ function crearListaOptionsHtml(cantidadElementos,idElemento = [],valorElemento= 
 function showHoursInSelect(){
     DateTime.now().hour
 }
-
-function mostrarCanchas(){
-    const BD =
-    [
-        {
-            id: 1,
-            nombre_cancha: 'GramaF6',
-            ubicacion: 'Carrera 123#32-34',
-            formato: '7',
-            precio_hora: '100000',
-            url_img: "http://"
-        },
-        {
-            id: 2,
-            nombre_cancha: 'FutSite5',
-            ubicacion: 'Carrera 56#37-12',
-            formato: '5',
-            precio_hora: '80000',
-            url_img: "http://"
-        },
-        {
-            id: 3,
-            nombre_cancha: 'Fut11',
-            ubicacion: 'Calle 100#15-23',
-            formato: '11',
-            precio_hora: '120000',
-            url_img: "http://"
-        },
-        {
-            id: 4,
-            nombre_cancha: 'GramaF6',
-            ubicacion: 'Carrera 123#32-34',
-            formato: '11',
-            precio_hora: '150000',
-            url_img: "http://"
-        }
-    ]
-
-    const pedirCanchas= () =>{
-        return new Promise((resolve,reject)=>{
-            setTimeout(()=>{
-                resolve(BD);
-            },3000);
-        });
-    }
-
-    let canchas = []
-    const renderCanchas = array =>{
-        for(const el of array){
-            let card = document.createElement("div");
-            card.classList.add("card");
-            card.setAttribute("style","width: 18rem;")
-            card.innerHTML = 
-            `
-                <img src="${el.url_img}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">${el.nombre_cancha}</h5>
-                    <p class="card-text">
-                        Ubicación: ${el.ubicacion}<br>
-                        Tamaño de la cancha: ${el.formato}<br>
-                        precio/hora: ${el.precio_hora}
-                    </p>
-                    <a href="#" class="btn btn-primary">Ver mas</a>
-                </div>
-            `;
-            main.append(card);
-        }
-    }
-
-    canchas = [...BD];
-    pedirCanchas()
-    .then(
-        renderCanchas(canchas)
-    )
-    .catch( error =>{
-            console.log(error)
-        }  
-    )
-}
-
 async function seleccionarModoDeJuego(e){
     const dataHorarios = await getData(JSON_HORAS_SERVICIO);
-    const dataCanchas = await getData(JSON_CIUDADES_COLOMBIA);
+    const dataCiudades = await getData(JSON_CIUDADES_COLOMBIA);
     let modoSeleccionado;
     modoSeleccionado = e.target;
     localStorage.setItem("modoSeleccionado", modoSeleccionado.innerText);
-    paginaAgendamiento(dataHorarios, dataCanchas);
+    paginaAgendamiento(dataHorarios, dataCiudades);
 }
 
 function mostrarSidebarExpandida(){

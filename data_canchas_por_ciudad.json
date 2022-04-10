@@ -1,177 +1,53 @@
 [
-    {
-        "Bogota": [
-            {
-              "id": 1,
-              "name": "5 Site Fútbol Occidente",
-              "direccion": "Cra. 114a #78-85, Bogotá, Cundinamarca",
-              "telefono": "3113403434",
-              "numeroCanchas": "4",
-              "formatos": [
-                {
-                  "futbol 5": true,
-                  "cantidad": 1,
-                  "precio_hora": 80000
-                },
-                {
-                  "futbol 7": true,
-                  "cantidad": 1,
-                  "precio_hora": 100000
-                },
-                {
-                  "futbol 9": true,
-                  "cantidad": 1,
-                  "precio_hora": 120000
-                },
-                {
-                  "futbol 11": true,
-                  "cantidad": 1,
-                  "precio_hora": 140000
-                }
-              ],
-              "precio_hora": "120000",
-              "url_img": "http://"
-            },
-            {
-              "id": 2,
-              "name": "Divergrama Occidente",
-              "direccion": "Av. Calle 72 # 112 a 01, Bogotá",
-              "telefono": "3102563434",
-              "numeroCanchas": "6",
-              "formatos": [
-                {
-                  "futbol 5": true,
-                  "cantidad": 2,
-                  "precio_hora": 90000
-                },
-                {
-                  "futbol 7": true,
-                  "cantidad": 4,
-                  "precio_hora": 120000
-                },
-                {
-                  "futbol 9": false,
-                  "cantidad": 0,
-                  "precio_hora": 0
-                },
-                {
-                  "futbol 11": false,
-                  "cantidad": 0,
-                  "precio_hora": 0
-                }
-              ],
-              "url_img": "http://"
-            },
-            {
-              "id": 3,
-              "name": "CANCHAS SINTETICAS GREMIO FC",
-              "direccion": "Calle 63, Cra. 105h #30, Bogotá",
-              "telefono": "3132703794",
-              "numeroCanchas": "4",
-              "formatos": [
-                {
-                  "futbol 5": true,
-                  "cantidad": 2,
-                  "precio_hora": 75000
-                },
-                {
-                  "futbol 7": true,
-                  "cantidad": 2,
-                  "precio_hora": 95000
-                },
-                {
-                  "futbol 9": false,
-                  "cantidad": 0,
-                  "precio_hora": 0
-                },
-                {
-                  "futbol 11": false,
-                  "cantidad": 0,
-                  "precio_hora": 0
-                }
-              ],
-              "url_img": "http://"
-            },
-            {
-              "id": 4,
-              "name": "CANCHAS SINTETICAS LA BOMBONERA",
-              "direccion": "Calle 134, Cra. 15 #21, Bogotá",
-              "telefono": "3139270437",
-              "numeroCanchas": 4,
-              "formatos": [
-                {
-                  "futbol 5": false,
-                  "cantidad": 0,
-                  "precio_hora": 0
-                },
-                {
-                  "futbol 7": false,
-                  "cantidad": 0,
-                  "precio_hora": 0
-                },
-                {
-                  "futbol 9": true,
-                  "cantidad": 2,
-                  "precio_hora": 140000
-                },
-                {
-                  "futbol 11": true,
-                  "cantidad": 2,
-                  "precio_hora": 160000
-                }
-              ],
-              "url_img": "http://"
-            }
-        ]
-    },
-    {
-      "Cali": [
+  [
         {
           "id": 1,
-          "name": "Canchas Sintéticas",
-          "direccion": "a 1a 4a-110, Cl. 70a #1a4, Cali, Palmira, Valle del Cauca",
-          "telefono": "3122733536",
-          "numeroCanchas": 2,
+          "name": "5 Site Fútbol Occidente",
+          "ciudad":"Bogota",
+          "direccion": "Cra. 114a #78-85, Bogotá, Cundinamarca",
+          "telefono": "3113403434",
+          "numeroCanchas": "4",
           "formatos": [
             {
               "futbol 5": true,
               "cantidad": 1,
-              "precio_hora": 70000
+              "precio_hora": 80000
             },
             {
-              "futbol 7": false,
-              "cantidad": 0,
-              "precio_hora": 0
+              "futbol 7": true,
+              "cantidad": 1,
+              "precio_hora": 100000
             },
             {
-              "futbol 9": false,
-              "cantidad": 0,
-              "precio_hora": 0
+              "futbol 9": true,
+              "cantidad": 1,
+              "precio_hora": 120000
             },
             {
               "futbol 11": true,
               "cantidad": 1,
-              "precio_hora": 100000
+              "precio_hora": 140000
             }
           ],
           "url_img": "http://"
         },
         {
           "id": 2,
-          "name": "Canchas Sintéticas Bernabeu",
-          "direccion": "Cra. 5 ###52, Cali, Valle del Cauca",
-          "telefono": "3151236434",
-          "numeroCanchas": 5,
+          "name": "Divergrama Occidente",
+          "ciudad":"Bogota",
+          "direccion": "Av. Calle 72 # 112 a 01, Bogotá",
+          "telefono": "3102563434",
+          "numeroCanchas": "6",
           "formatos": [
             {
               "futbol 5": true,
-              "cantidad": 3,
-              "precio_hora": 70000
+              "cantidad": 2,
+              "precio_hora": 90000
             },
             {
               "futbol 7": true,
-              "cantidad": 2,
-              "precio_hora": 100000
+              "cantidad": 4,
+              "precio_hora": 120000
             },
             {
               "futbol 9": false,
@@ -188,50 +64,21 @@
         },
         {
           "id": 3,
-          "name": "Canchas Sintéticas La Bombonera Futgol 5",
-          "direccion": "Cra. 5 ###52, Cali, Valle del Cauca",
-          "telefono": "3172203334",
-          "numeroCanchas": 2,
+          "name": "CANCHAS SINTETICAS GREMIO FC",
+          "ciudad":"Bogota",
+          "direccion": "Calle 63, Cra. 105h #30, Bogotá",
+          "telefono": "3132703794",
+          "numeroCanchas": "4",
           "formatos": [
             {
               "futbol 5": true,
-              "cantidad": 1,
-              "precio_hora": 70000
+              "cantidad": 2,
+              "precio_hora": 75000
             },
             {
-              "futbol 7": false,
-              "cantidad": 0,
-              "precio_hora": 0
-            },
-            {
-              "futbol 9": false,
-              "cantidad": 0,
-              "precio_hora": 0
-            },
-            {
-              "futbol 11": true,
-              "cantidad": 1,
-              "precio_hora": 100000
-            }
-          ],
-          "url_img": "http://"
-        },
-        {
-          "id": 4,
-          "name": "CANCHAS SINTETICAS San Luis 1",
-          "direccion": "53 a 1a 10-105,, Cl. 71 #1a10, Cali, Palmira, Valle del Cauca",
-          "telefono": "3008650949",
-          "numeroCanchas": 3,
-          "formatos": [
-            {
-              "futbol 5": true,
-              "cantidad": 3,
-              "precio_hora": 90000
-            },
-            {
-              "futbol 7": false,
-              "cantidad": 0,
-              "precio_hora": 0
+              "futbol 7": true,
+              "cantidad": 2,
+              "precio_hora": 95000
             },
             {
               "futbol 9": false,
@@ -247,10 +94,11 @@
           "url_img": "http://"
         },
         {
-          "id": 5,
-          "name": "La Caldera Canchas Sintéticas",
-          "direccion": "6to Piso La 14 Avenida 6ta Avenida 6N #30N-47, Cali, Valle del Cauca",
-          "telefono": "3129549437",
+          "id": 4,
+          "name": "CANCHAS SINTETICAS LA BOMBONERA",
+          "ciudad":"Bogota",
+          "direccion": "Calle 134, Cra. 15 #21, Bogotá",
+          "telefono": "3139270437",
           "numeroCanchas": 4,
           "formatos": [
             {
@@ -276,160 +124,319 @@
           ],
           "url_img": "http://"
         }
-      ]
-    },
-    {
-      "Medellín": [
-        {
-          "id": 1,
-          "name": "Canchas Sintéticas Los Estadios",
-          "direccion": "Cra. 55 #60-35, Medellín, Antioquia",
-          "telefono": "(4) 2933014",
-          "numeroCanchas": 2,
-          "formatos": [
-            {
-              "futbol 5": true,
-              "cantidad": 1,
-              "precio_hora": 70000
-            },
-            {
-              "futbol 7": false,
-              "cantidad": 0,
-              "precio_hora": 0
-            },
-            {
-              "futbol 9": false,
-              "cantidad": 0,
-              "precio_hora": 0
-            },
-            {
-              "futbol 11": true,
-              "cantidad": 1,
-              "precio_hora": 100000
-            }
-          ],
-          "url_img": "http://"
-        },
-        {
-          "id": 2,
-          "name": "El Golazo",
-          "direccion": "Cl. 50 #Nº 67 – 73, Medellín, Antioquia",
-          "telefono": "3148896044",
-          "numeroCanchas": 3,
-          "formatos": [
-            {
-              "futbol 5": false,
-              "cantidad": 0,
-              "precio_hora": 0
-            },
-            {
-              "futbol 7": false,
-              "cantidad": 0,
-              "precio_hora": 0
-            },
-            {
-              "futbol 9": true,
-              "cantidad": 3,
-              "precio_hora": 120000
-            },
-            {
-              "futbol 11": false,
-              "cantidad": 0,
-              "precio_hora": 0
-            }
-          ],
-          "url_img": "http://"
-        },
-        {
-          "id": 3,
-          "name": "Il Campo Canchas Sintéticas",
-          "direccion": "Av. 80 ##45E - 29, Medellín, Antioquia",
-          "telefono": "(4) 4084232",
-          "numeroCanchas": 4,
-          "formatos": [
-            {
-              "futbol 5": false,
-              "cantidad": 0,
-              "precio_hora": 0
-            },
-            {
-              "futbol 7": true,
-              "cantidad": 2,
-              "precio_hora": 100000
-            },
-            {
-              "futbol 9": true,
-              "cantidad": 2,
-              "precio_hora": 120000
-            },
-            {
-              "futbol 11": false,
-              "cantidad": 0,
-              "precio_hora": 0
-            }
-          ],
-          "url_img": "http://"
-        },
-        {
-          "id": 4,
-          "name": "Canchas Sinteticas Los Bernal",
-          "direccion": "Cra. 84b, Medellín, Antioquia",
-          "telefono": "3016470759",
-          "numeroCanchas": 3,
-          "formatos": [
-            {
-              "futbol 5": true,
-              "cantidad": 1,
-              "precio_hora": 90000
-            },
-            {
-              "futbol 7": false,
-              "cantidad": 0,
-              "precio_hora": 0
-            },
-            {
-              "futbol 9": false,
-              "cantidad": 0,
-              "precio_hora": 0
-            },
-            {
-              "futbol 11": true,
-              "cantidad": 2,
-              "precio_hora": 150000
-            }
-          ],
-          "url_img": "http://"
-        },
-        {
-          "id": 5,
-          "name": "canchas el escorpion",
-          "direccion": "a 65-315, Tv. 78 #65251, Medellín, Antioquia",
-          "telefono": "(4) 4424244",
-          "numeroCanchas": 4,
-          "formatos": [
-            {
-              "futbol 5": false,
-              "cantidad": 0,
-              "precio_hora": 0
-            },
-            {
-              "futbol 7": true,
-              "cantidad": 1,
-              "precio_hora": 120000
-            },
-            {
-              "futbol 9": true,
-              "cantidad": 1,
-              "precio_hora": 140000
-            },
-            {
-              "futbol 11": true,
-              "cantidad": 2,
-              "precio_hora": 160000
-            }
-          ],
-          "url_img": "http://"
-        }
-      ]
-    }   
+  ],
+  [
+      {
+        "id": 1,
+        "name": "Canchas Sintéticas",
+        "ciudad":"Cali",
+        "direccion": "a 1a 4a-110, Cl. 70a #1a4, Cali, Palmira, Valle del Cauca",
+        "telefono": "3122733536",
+        "numeroCanchas": 2,
+        "formatos": [
+          {
+            "futbol 5": true,
+            "cantidad": 1,
+            "precio_hora": 70000
+          },
+          {
+            "futbol 7": false,
+            "cantidad": 0,
+            "precio_hora": 0
+          },
+          {
+            "futbol 9": false,
+            "cantidad": 0,
+            "precio_hora": 0
+          },
+          {
+            "futbol 11": true,
+            "cantidad": 1,
+            "precio_hora": 100000
+          }
+        ],
+        "url_img": "http://"
+      },
+      {
+        "id": 2,
+        "name": "Canchas Sintéticas Bernabeu",
+        "ciudad":"Cali",
+        "direccion": "Cra. 5 ###52, Cali, Valle del Cauca",
+        "telefono": "3151236434",
+        "numeroCanchas": 5,
+        "formatos": [
+          {
+            "futbol 5": true,
+            "cantidad": 3,
+            "precio_hora": 70000
+          },
+          {
+            "futbol 7": true,
+            "cantidad": 2,
+            "precio_hora": 100000
+          },
+          {
+            "futbol 9": false,
+            "cantidad": 0,
+            "precio_hora": 0
+          },
+          {
+            "futbol 11": false,
+            "cantidad": 0,
+            "precio_hora": 0
+          }
+        ],
+        "url_img": "http://"
+      },
+      {
+        "id": 3,
+        "name": "Canchas Sintéticas La Bombonera Futgol 5",
+        "ciudad":"Cali",
+        "direccion": "Cra. 5 ###52, Cali, Valle del Cauca",
+        "telefono": "3172203334",
+        "numeroCanchas": 2,
+        "formatos": [
+          {
+            "futbol 5": true,
+            "cantidad": 1,
+            "precio_hora": 70000
+          },
+          {
+            "futbol 7": false,
+            "cantidad": 0,
+            "precio_hora": 0
+          },
+          {
+            "futbol 9": false,
+            "cantidad": 0,
+            "precio_hora": 0
+          },
+          {
+            "futbol 11": true,
+            "cantidad": 1,
+            "precio_hora": 100000
+          }
+        ],
+        "url_img": "http://"
+      },
+      {
+        "id": 4,
+        "name": "CANCHAS SINTETICAS San Luis 1",
+        "ciudad":"Cali",
+        "direccion": "53 a 1a 10-105,, Cl. 71 #1a10, Cali, Palmira, Valle del Cauca",
+        "telefono": "3008650949",
+        "numeroCanchas": 3,
+        "formatos": [
+          {
+            "futbol 5": true,
+            "cantidad": 3,
+            "precio_hora": 90000
+          },
+          {
+            "futbol 7": false,
+            "cantidad": 0,
+            "precio_hora": 0
+          },
+          {
+            "futbol 9": false,
+            "cantidad": 0,
+            "precio_hora": 0
+          },
+          {
+            "futbol 11": false,
+            "cantidad": 0,
+            "precio_hora": 0
+          }
+        ],
+        "url_img": "http://"
+      },
+      {
+        "id": 5,
+        "name": "La Caldera Canchas Sintéticas",
+        "ciudad":"Cali",
+        "direccion": "6to Piso La 14 Avenida 6ta Avenida 6N #30N-47, Cali, Valle del Cauca",
+        "telefono": "3129549437",
+        "numeroCanchas": 4,
+        "formatos": [
+          {
+            "futbol 5": false,
+            "cantidad": 0,
+            "precio_hora": 0
+          },
+          {
+            "futbol 7": false,
+            "cantidad": 0,
+            "precio_hora": 0
+          },
+          {
+            "futbol 9": true,
+            "cantidad": 2,
+            "precio_hora": 140000
+          },
+          {
+            "futbol 11": true,
+            "cantidad": 2,
+            "precio_hora": 160000
+          }
+        ],
+        "url_img": "http://"
+      }
+  ],
+  [
+      {
+        "id": 1,
+        "name": "Canchas Sintéticas Los Estadios",
+        "ciudad":"Medellin",
+        "direccion": "Cra. 55 #60-35, Medellín, Antioquia",
+        "telefono": "(4) 2933014",
+        "numeroCanchas": 2,
+        "formatos": [
+          {
+            "futbol 5": true,
+            "cantidad": 1,
+            "precio_hora": 70000
+          },
+          {
+            "futbol 7": false,
+            "cantidad": 0,
+            "precio_hora": 0
+          },
+          {
+            "futbol 9": false,
+            "cantidad": 0,
+            "precio_hora": 0
+          },
+          {
+            "futbol 11": true,
+            "cantidad": 1,
+            "precio_hora": 100000
+          }
+        ],
+        "url_img": "http://"
+      },
+      {
+        "id": 2,
+        "name": "El Golazo",
+        "ciudad":"Medellin",
+        "direccion": "Cl. 50 #Nº 67 – 73, Medellín, Antioquia",
+        "telefono": "3148896044",
+        "numeroCanchas": 3,
+        "formatos": [
+          {
+            "futbol 5": false,
+            "cantidad": 0,
+            "precio_hora": 0
+          },
+          {
+            "futbol 7": false,
+            "cantidad": 0,
+            "precio_hora": 0
+          },
+          {
+            "futbol 9": true,
+            "cantidad": 3,
+            "precio_hora": 120000
+          },
+          {
+            "futbol 11": false,
+            "cantidad": 0,
+            "precio_hora": 0
+          }
+        ],
+        "url_img": "http://"
+      },
+      {
+        "id": 3,
+        "name": "Il Campo Canchas Sintéticas",
+        "ciudad":"Medellin",
+        "direccion": "Av. 80 ##45E - 29, Medellín, Antioquia",
+        "telefono": "(4) 4084232",
+        "numeroCanchas": 4,
+        "formatos": [
+          {
+            "futbol 5": false,
+            "cantidad": 0,
+            "precio_hora": 0
+          },
+          {
+            "futbol 7": true,
+            "cantidad": 2,
+            "precio_hora": 100000
+          },
+          {
+            "futbol 9": true,
+            "cantidad": 2,
+            "precio_hora": 120000
+          },
+          {
+            "futbol 11": false,
+            "cantidad": 0,
+            "precio_hora": 0
+          }
+        ],
+        "url_img": "http://"
+      },
+      {
+        "id": 4,
+        "name": "Canchas Sinteticas Los Bernal",
+        "ciudad":"Medellin",
+        "direccion": "Cra. 84b, Medellín, Antioquia",
+        "telefono": "3016470759",
+        "numeroCanchas": 3,
+        "formatos": [
+          {
+            "futbol 5": true,
+            "cantidad": 1,
+            "precio_hora": 90000
+          },
+          {
+            "futbol 7": false,
+            "cantidad": 0,
+            "precio_hora": 0
+          },
+          {
+            "futbol 9": false,
+            "cantidad": 0,
+            "precio_hora": 0
+          },
+          {
+            "futbol 11": true,
+            "cantidad": 2,
+            "precio_hora": 150000
+          }
+        ],
+        "url_img": "http://"
+      },
+      {
+        "id": 5,
+        "name": "canchas el escorpion",
+        "ciudad":"Medellin",
+        "direccion": "a 65-315, Tv. 78 #65251, Medellín, Antioquia",
+        "telefono": "(4) 4424244",
+        "numeroCanchas": 4,
+        "formatos": [
+          {
+            "futbol 5": false,
+            "cantidad": 0,
+            "precio_hora": 0
+          },
+          {
+            "futbol 7": true,
+            "cantidad": 1,
+            "precio_hora": 120000
+          },
+          {
+            "futbol 9": true,
+            "cantidad": 1,
+            "precio_hora": 140000
+          },
+          {
+            "futbol 11": true,
+            "cantidad": 2,
+            "precio_hora": 160000
+          }
+        ],
+        "url_img": "http://"
+      }
+  ]  
 ]

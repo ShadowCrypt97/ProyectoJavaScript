@@ -1,18 +1,18 @@
 [
     {
-        "id": 1,
-        "ciudad": "Bogota"
+        "id": 0,
+        "ciudad": "Bogotá"
     },
     {
-        "id": 2,
+        "id": 1,
         "ciudad": "Cali"
     },
     {
-        "id": 3,
-        "ciudad": "Medellin"
+        "id": 2,
+        "ciudad": "Medellín"
     },
     {
-        "id": 0,
+        "id": 3,
         "ciudad": "Mostrar Todas"
     }
 ]
