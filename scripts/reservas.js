@@ -7,6 +7,8 @@ const userName = document.querySelector("#name");
 const correo = localStorage.getItem("actuallyLoggedIn");
 const userData = JSON.parse(localStorage.getItem(correo));
 var DateTime = luxon.DateTime;
+var Duration = luxon.Duration;
+let d;
 DateTime.now().setZone("system");
 /************CONSTANTES*************/
 const JSON_FORMATO_CANCHAS = "../data_formato_canchas.json";
@@ -70,7 +72,7 @@ const createPageModalidad = (async ()=>{
 })();
 
 function borrarMain(){
-    main.innerHTML = `<h1>Selecciona la fecha y hora del partido</h1>`;
+    main.innerHTML = `<h1>Selecciona la fecha, hora y lugar del partido</h1>`;
 }
 
 
@@ -145,6 +147,7 @@ function paginaAgendamiento(dataHorarios, dataCiudades){
         onChange: function (res) {
             document.querySelector("#dateInput").removeAttribute("disabled readonly");
             document.querySelector("#dateInput").setAttribute("value",'La fecha seleccionada es '+ res.date.l+ ' ' + res.date.d + ' de ' +res.date.F +' del '+res.date.Y);
+            d = DateTime.fromFormat(res.date.formatted, "MM/dd/yyyy");
         }
     });
 }
@@ -166,47 +169,55 @@ function renderTarjetasCanchas(data, dataCiudades){
     const optionhour = hourField.options[hourField.selectedIndex].text;
     
     if(inputDate!="" && optionhour != "Selecciona una hora..."){
-        if(optionCity == dataCiudades[0].ciudad){
-            for(const el of data[0]){
-                const card = crearTarjeta(el.id,el.name,el.direccion,"../images/futbol-11.jpg");
-                document?.querySelector("#gridCards")?.remove()||gridCards.appendChild(card);
-            } 
-        }
-        else if(optionCity == dataCiudades[1].ciudad)
-        {
-            for(const el of data[1]){
-                const card = crearTarjeta(el.id,el.name,el.direccion,"../images/futbol-7.jpg");
-                document?.querySelector("#gridCards")?.remove()||gridCards.appendChild(card);
-            } 
-        }
-        else if(optionCity == dataCiudades[2].ciudad){
-            for(const el of data[2]){
-                const card = crearTarjeta(el.id,el.name,el.direccion,"../images/futbol-9.jpg");
-                document?.querySelector("#gridCards")?.remove()||gridCards.appendChild(card);
-            } 
-        }
-        else if(optionCity == dataCiudades[3].ciudad){
-            for(const el of data[0]){
-                const card = crearTarjeta(el.id,el.name,el.direccion,"../images/futbol-11.jpg");
-                document?.querySelector("#gridCards")?.remove()||gridCards.appendChild(card);
-            } 
-            for(const el of data[1]){
-                const card = crearTarjeta(el.id,el.name,el.direccion,"../images/futbol-7.jpg");
-                document?.querySelector("#gridCards")?.remove()||gridCards.appendChild(card);
-            } 
-            for(const el of data[2]){
-                const card = crearTarjeta(el.id,el.name,el.direccion,"../images/futbol-9.jpg");
-                document?.querySelector("#gridCards")?.remove()||gridCards.appendChild(card);
-            } 
+        if(calcularDiferenciaHoraria(optionhour)>0){
+            if(optionCity == dataCiudades[0].ciudad){
+                for(const el of data[0]){
+                    const card = crearTarjeta(el.id,el.name,el.direccion,"../images/futbol-11.jpg");
+                    document?.querySelector("#gridCards")?.remove()||gridCards.appendChild(card);
+                } 
+            }
+            else if(optionCity == dataCiudades[1].ciudad)
+            {
+                for(const el of data[1]){
+                    const card = crearTarjeta(el.id,el.name,el.direccion,"../images/futbol-7.jpg");
+                    document?.querySelector("#gridCards")?.remove()||gridCards.appendChild(card);
+                } 
+            }
+            else if(optionCity == dataCiudades[2].ciudad){
+                for(const el of data[2]){
+                    const card = crearTarjeta(el.id,el.name,el.direccion,"../images/futbol-9.jpg");
+                    document?.querySelector("#gridCards")?.remove()||gridCards.appendChild(card);
+                } 
+            }
+            else if(optionCity == dataCiudades[3].ciudad){
+                for(const el of data[0]){
+                    const card = crearTarjeta(el.id,el.name,el.direccion,"../images/futbol-11.jpg");
+                    document?.querySelector("#gridCards")?.remove()||gridCards.appendChild(card);
+                } 
+                for(const el of data[1]){
+                    const card = crearTarjeta(el.id,el.name,el.direccion,"../images/futbol-7.jpg");
+                    document?.querySelector("#gridCards")?.remove()||gridCards.appendChild(card);
+                } 
+                for(const el of data[2]){
+                    const card = crearTarjeta(el.id,el.name,el.direccion,"../images/futbol-9.jpg");
+                    document?.querySelector("#gridCards")?.remove()||gridCards.appendChild(card);
+                } 
+            }
+            else
+                Swal.fire(  
+                    'Selecciona una opción',
+                    'Debes seleccionar alguna ciudad',
+                    'error'
+                )
+            gridCards.className = "row row-cols-1 row-cols-md-3 g-4";
+            main.appendChild(gridCards);
         }
         else
             Swal.fire(  
-                'Selecciona una opción',
-                'Debes seleccionar alguna ciudad',
+                'Ingrese una hora válida',
+                'La hora seleccionada es inválida porque ya pasó.',
                 'error'
             )
-        gridCards.className = "row row-cols-1 row-cols-md-3 g-4";
-        main.appendChild(gridCards);
     }
     else
         Swal.fire(  
@@ -214,6 +225,12 @@ function renderTarjetasCanchas(data, dataCiudades){
             'Debes seleccionar una fecha y una hora para reservar la cancha',
             'error'
         )
+}
+
+function calcularDiferenciaHoraria(horaSeleccionada){
+    let h = DateTime.fromFormat(horaSeleccionada,"H:mm");
+    let dur = Duration.fromObject({hours:h.hour})
+    return d.plus(dur.toObject()).diffNow('hours');
 }
 
 function crearTarjeta(canchaId, title, direccion, source_img){
