@@ -158,12 +158,24 @@ async function dataCanchas(){
     renderTarjetasCanchas(data, dataCiudades);
     const botonesVerCanchas = document.querySelectorAll(".btn__verCanchas");
     botonesVerCanchas.forEach(boton=>{
-        boton.addEventListener("click",canchaSeleccionada);
+        boton.addEventListener("click",(evt) =>canchaSeleccionada(evt,data));
     })
 }
 
-function canchaSeleccionada(e){
-    console.log(e.target);
+function canchaSeleccionada(evt, data=[]){
+    const elemento = evt.target;
+    const idElemento = elemento.getAttribute("id");
+    const ciudad = idElemento.split(/\d/g)[0].toLowerCase();
+    const idNumero = parseInt(idElemento.split(/[a-z]{0,25}[^\d]/g)[2]);
+    const seleccionUsuario = []; 
+    data.forEach(el=>{
+        let filtro = el.find((seleccion)=>{
+            return (seleccion.ciudad.toLowerCase() == ciudad && seleccion.id == idNumero);
+        });
+        (filtro||false != false) && seleccionUsuario.push(filtro);
+    })
+    localStorage.setItem("canchaSeleccionada",JSON.stringify(seleccionUsuario[0]));
+
 }
 
 function renderTarjetasCanchas(data, dataCiudades){
