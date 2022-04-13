@@ -9,22 +9,22 @@
           "numeroCanchas": "4",
           "formatos": [
             {
-              "futbol 5": true,
+              "formato": "futbol5",
               "cantidad": 1,
               "precio_hora": 80000
             },
             {
-              "futbol 7": true,
+              "formato": "futbol7",
               "cantidad": 1,
               "precio_hora": 100000
             },
             {
-              "futbol 9": true,
+              "formato": "futbol9",
               "cantidad": 1,
               "precio_hora": 120000
             },
             {
-              "futbol 11": true,
+              "formato": "futbol11",
               "cantidad": 1,
               "precio_hora": 140000
             }
@@ -40,24 +40,14 @@
           "numeroCanchas": "6",
           "formatos": [
             {
-              "futbol 5": true,
+              "formato": "futbol5",
               "cantidad": 2,
               "precio_hora": 90000
             },
             {
-              "futbol 7": true,
+              "formato": "futbol7",
               "cantidad": 4,
               "precio_hora": 120000
-            },
-            {
-              "futbol 9": false,
-              "cantidad": 0,
-              "precio_hora": 0
-            },
-            {
-              "futbol 11": false,
-              "cantidad": 0,
-              "precio_hora": 0
             }
           ],
           "url_img": "http://"
@@ -71,24 +61,14 @@
           "numeroCanchas": "4",
           "formatos": [
             {
-              "futbol 5": true,
+              "formato": "futbol5",
               "cantidad": 2,
               "precio_hora": 75000
             },
             {
-              "futbol 7": true,
+              "formato": "futbol7",
               "cantidad": 2,
               "precio_hora": 95000
-            },
-            {
-              "futbol 9": false,
-              "cantidad": 0,
-              "precio_hora": 0
-            },
-            {
-              "futbol 11": false,
-              "cantidad": 0,
-              "precio_hora": 0
             }
           ],
           "url_img": "http://"
@@ -102,22 +82,12 @@
           "numeroCanchas": 4,
           "formatos": [
             {
-              "futbol 5": false,
-              "cantidad": 0,
-              "precio_hora": 0
-            },
-            {
-              "futbol 7": false,
-              "cantidad": 0,
-              "precio_hora": 0
-            },
-            {
-              "futbol 9": true,
+              "formato": "futbol9",
               "cantidad": 2,
               "precio_hora": 140000
             },
             {
-              "futbol 11": true,
+              "formato": "futbol11",
               "cantidad": 2,
               "precio_hora": 160000
             }
@@ -135,22 +105,12 @@
         "numeroCanchas": 2,
         "formatos": [
           {
-            "futbol 5": true,
+            "formato": "futbol5",
             "cantidad": 1,
             "precio_hora": 70000
           },
           {
-            "futbol 7": false,
-            "cantidad": 0,
-            "precio_hora": 0
-          },
-          {
-            "futbol 9": false,
-            "cantidad": 0,
-            "precio_hora": 0
-          },
-          {
-            "futbol 11": true,
+            "formato": "futbol11",
             "cantidad": 1,
             "precio_hora": 100000
           }
@@ -166,24 +126,14 @@
         "numeroCanchas": 5,
         "formatos": [
           {
-            "futbol 5": true,
+            "formato": "futbol5",
             "cantidad": 3,
             "precio_hora": 70000
           },
           {
-            "futbol 7": true,
+            "formato": "futbol7",
             "cantidad": 2,
             "precio_hora": 100000
-          },
-          {
-            "futbol 9": false,
-            "cantidad": 0,
-            "precio_hora": 0
-          },
-          {
-            "futbol 11": false,
-            "cantidad": 0,
-            "precio_hora": 0
           }
         ],
         "url_img": "http://"
@@ -197,22 +147,12 @@
         "numeroCanchas": 2,
         "formatos": [
           {
-            "futbol 5": true,
+            "formato": "futbol5",
             "cantidad": 1,
             "precio_hora": 70000
           },
           {
-            "futbol 7": false,
-            "cantidad": 0,
-            "precio_hora": 0
-          },
-          {
-            "futbol 9": false,
-            "cantidad": 0,
-            "precio_hora": 0
-          },
-          {
-            "futbol 11": true,
+            "formato": "futbol11",
             "cantidad": 1,
             "precio_hora": 100000
           }
@@ -228,24 +168,9 @@
         "numeroCanchas": 3,
         "formatos": [
           {
-            "futbol 5": true,
+            "formato": "futbol5",
             "cantidad": 3,
             "precio_hora": 90000
-          },
-          {
-            "futbol 7": false,
-            "cantidad": 0,
-            "precio_hora": 0
-          },
-          {
-            "futbol 9": false,
-            "cantidad": 0,
-            "precio_hora": 0
-          },
-          {
-            "futbol 11": false,
-            "cantidad": 0,
-            "precio_hora": 0
           }
         ],
         "url_img": "http://"
@@ -259,22 +184,12 @@
         "numeroCanchas": 4,
         "formatos": [
           {
-            "futbol 5": false,
-            "cantidad": 0,
-            "precio_hora": 0
-          },
-          {
-            "futbol 7": false,
-            "cantidad": 0,
-            "precio_hora": 0
-          },
-          {
-            "futbol 9": true,
+            "formato": "futbol9",
             "cantidad": 2,
             "precio_hora": 140000
           },
           {
-            "futbol 11": true,
+            "formato": "futbol11",
             "cantidad": 2,
             "precio_hora": 160000
           }
@@ -292,22 +207,12 @@
         "numeroCanchas": 2,
         "formatos": [
           {
-            "futbol 5": true,
+            "formato": "futbol5",
             "cantidad": 1,
             "precio_hora": 70000
           },
           {
-            "futbol 7": false,
-            "cantidad": 0,
-            "precio_hora": 0
-          },
-          {
-            "futbol 9": false,
-            "cantidad": 0,
-            "precio_hora": 0
-          },
-          {
-            "futbol 11": true,
+            "formato": "futbol11",
             "cantidad": 1,
             "precio_hora": 100000
           }
@@ -323,24 +228,9 @@
         "numeroCanchas": 3,
         "formatos": [
           {
-            "futbol 5": false,
-            "cantidad": 0,
-            "precio_hora": 0
-          },
-          {
-            "futbol 7": false,
-            "cantidad": 0,
-            "precio_hora": 0
-          },
-          {
-            "futbol 9": true,
+            "formato": "futbol9",
             "cantidad": 3,
             "precio_hora": 120000
-          },
-          {
-            "futbol 11": false,
-            "cantidad": 0,
-            "precio_hora": 0
           }
         ],
         "url_img": "http://"
@@ -354,24 +244,14 @@
         "numeroCanchas": 4,
         "formatos": [
           {
-            "futbol 5": false,
-            "cantidad": 0,
-            "precio_hora": 0
-          },
-          {
-            "futbol 7": true,
+            "formato": "futbol7",
             "cantidad": 2,
             "precio_hora": 100000
           },
           {
-            "futbol 9": true,
+            "formato": "futbol9",
             "cantidad": 2,
             "precio_hora": 120000
-          },
-          {
-            "futbol 11": false,
-            "cantidad": 0,
-            "precio_hora": 0
           }
         ],
         "url_img": "http://"
@@ -385,22 +265,12 @@
         "numeroCanchas": 3,
         "formatos": [
           {
-            "futbol 5": true,
+            "formato": "futbol5",
             "cantidad": 1,
             "precio_hora": 90000
           },
           {
-            "futbol 7": false,
-            "cantidad": 0,
-            "precio_hora": 0
-          },
-          {
-            "futbol 9": false,
-            "cantidad": 0,
-            "precio_hora": 0
-          },
-          {
-            "futbol 11": true,
+            "formato": "futbol11",
             "cantidad": 2,
             "precio_hora": 150000
           }
@@ -416,22 +286,17 @@
         "numeroCanchas": 4,
         "formatos": [
           {
-            "futbol 5": false,
-            "cantidad": 0,
-            "precio_hora": 0
-          },
-          {
-            "futbol 7": true,
+            "formato": "futbol7",
             "cantidad": 1,
             "precio_hora": 120000
           },
           {
-            "futbol 9": true,
+            "formato": "futbol9",
             "cantidad": 1,
             "precio_hora": 140000
           },
           {
-            "futbol 11": true,
+            "formato": "futbol11",
             "cantidad": 2,
             "precio_hora": 160000
           }

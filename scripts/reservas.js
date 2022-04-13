@@ -156,6 +156,14 @@ async function dataCanchas(){
     const data = await getData(JSON_CANCHAS_POR_CIUDAD);
     const dataCiudades = await getData(JSON_CIUDADES_COLOMBIA);
     renderTarjetasCanchas(data, dataCiudades);
+    const botonesVerCanchas = document.querySelectorAll(".btn__verCanchas");
+    botonesVerCanchas.forEach(boton=>{
+        boton.addEventListener("click",canchaSeleccionada);
+    })
+}
+
+function canchaSeleccionada(e){
+    console.log(e.target);
 }
 
 function renderTarjetasCanchas(data, dataCiudades){
@@ -167,39 +175,41 @@ function renderTarjetasCanchas(data, dataCiudades){
     const optionCity = selectCity.options[selectCity.selectedIndex].text;
     const inputDate = dateField.value;
     const optionhour = hourField.options[hourField.selectedIndex].text;
-    
+    const formatoSeleccionado = localStorage.getItem("modoSeleccionado");
+    const cadena = removeAccents(formatoSeleccionado.toLowerCase());
+
     if(inputDate!="" && optionhour != "Selecciona una hora..."){
         if(calcularDiferenciaHoraria(optionhour)>0){
             if(optionCity == dataCiudades[0].ciudad){
-                for(const el of data[0]){
-                    const card = crearTarjeta(el.id,el.name,el.direccion,"../images/futbol-11.jpg");
-                    document?.querySelector("#gridCards")?.remove()||gridCards.appendChild(card);
-                } 
+                for(const el of filtroFormatoCancha(data[0], cadena)){
+                    const card = crearTarjeta(el.ciudad+el.id,el.name,el.direccion,"../images/futbol-11.jpg");
+                    document?.querySelector("#gridCards")?.remove()||gridCards.appendChild(card);            
+                }
             }
             else if(optionCity == dataCiudades[1].ciudad)
             {
-                for(const el of data[1]){
-                    const card = crearTarjeta(el.id,el.name,el.direccion,"../images/futbol-7.jpg");
+                for(const el of filtroFormatoCancha(data[1],cadena)){
+                    const card = crearTarjeta(el.ciudad+el.id,el.name,el.direccion,"../images/futbol-7.jpg");
                     document?.querySelector("#gridCards")?.remove()||gridCards.appendChild(card);
                 } 
             }
             else if(optionCity == dataCiudades[2].ciudad){
-                for(const el of data[2]){
-                    const card = crearTarjeta(el.id,el.name,el.direccion,"../images/futbol-9.jpg");
+                for(const el of filtroFormatoCancha(data[2],cadena)){
+                    const card = crearTarjeta(el.ciudad+el.id,el.name,el.direccion,"../images/futbol-9.jpg");
                     document?.querySelector("#gridCards")?.remove()||gridCards.appendChild(card);
                 } 
             }
             else if(optionCity == dataCiudades[3].ciudad){
-                for(const el of data[0]){
-                    const card = crearTarjeta(el.id,el.name,el.direccion,"../images/futbol-11.jpg");
+                for(const el of filtroFormatoCancha(data[0],cadena)){
+                    const card = crearTarjeta(el.ciudad+el.id,el.name,el.direccion,"../images/futbol-11.jpg");
                     document?.querySelector("#gridCards")?.remove()||gridCards.appendChild(card);
                 } 
-                for(const el of data[1]){
-                    const card = crearTarjeta(el.id,el.name,el.direccion,"../images/futbol-7.jpg");
+                for(const el of filtroFormatoCancha(data[1],cadena)){
+                    const card = crearTarjeta(el.ciudad+el.id,el.name,el.direccion,"../images/futbol-7.jpg");
                     document?.querySelector("#gridCards")?.remove()||gridCards.appendChild(card);
-                } 
-                for(const el of data[2]){
-                    const card = crearTarjeta(el.id,el.name,el.direccion,"../images/futbol-9.jpg");
+                }
+                for(const el of filtroFormatoCancha(data[2],cadena)){
+                    const card = crearTarjeta(el.ciudad+el.id,el.name,el.direccion,"../images/futbol-9.jpg");
                     document?.querySelector("#gridCards")?.remove()||gridCards.appendChild(card);
                 } 
             }
@@ -227,6 +237,19 @@ function renderTarjetasCanchas(data, dataCiudades){
         )
 }
 
+function filtroFormatoCancha(data = [], cadena ){
+    return data.filter((formato)=>{
+        var array = formato.formatos.filter((el)=>{
+            return el.formato == cadena;
+        });
+        return array.some((el)=>{return el.formato == cadena});
+    });
+}
+
+const removeAccents = (str) => {
+    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace("\u0020","");
+} 
+
 function calcularDiferenciaHoraria(horaSeleccionada){
     let h = DateTime.fromFormat(horaSeleccionada,"H:mm");
     let dur = Duration.fromObject({hours:h.hour})
@@ -243,7 +266,7 @@ function crearTarjeta(canchaId, title, direccion, source_img){
             <div class="card-body">
                 <h5 id="title${canchaId}" class="card-title">${title}</h5>
                 <p class="card-text">${direccion}</p>
-                <a id="" href="#" class="btn btn-primary">Ver Cancha</a>
+                <a id="${canchaId}" href="#" class="btn btn-primary btn__verCanchas">Ver Cancha</a>
             </div>
         </div>
     `;
