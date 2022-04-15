@@ -163,11 +163,13 @@ async function dataCanchas(){
 }
 
 function canchaSeleccionada(evt, data=[]){
-    const elemento = evt.target;
-    const idElemento = elemento.getAttribute("id");
-    const ciudad = idElemento.split(/\d/g)[0].toLowerCase();
-    const idNumero = parseInt(idElemento.split(/[a-z]{0,25}[^\d]/g)[2]);
-    const seleccionUsuario = []; 
+    const elemento = evt.target,
+          idElemento = elemento.getAttribute("id"),
+          ciudad = idElemento.split(/\d/g)[0].toLowerCase(),
+          idNumero = parseInt(idElemento.split(/[a-z]{0,25}[^\d]/g)[2]),
+          seleccionUsuario = [],
+          dateTime = DateTime.fromISO(localStorage.getItem(userData[0].id)); 
+
     data.forEach(el=>{
         let filtro = el.find((seleccion)=>{
             return (seleccion.ciudad.toLowerCase() == ciudad && seleccion.id == idNumero);
@@ -175,7 +177,300 @@ function canchaSeleccionada(evt, data=[]){
         (filtro||false != false) && seleccionUsuario.push(filtro);
     })
     localStorage.setItem("canchaSeleccionada",JSON.stringify(seleccionUsuario[0]));
+    renderPaymentPage(seleccionUsuario, dateTime);
+    realizarPago();
+    
+          
+}
 
+function realizarPago(){
+    const sendBtn = document.querySelector('#boton-enviar');
+    // prevent default y mensaje de pago exitoso
+    sendBtn.addEventListener("click",e=>{
+        e.preventDefault();
+        Swal.fire(
+            {
+                allowOutsideClick: false,
+                title: 'Pago Exitoso',
+                text: 'El pago fue realizado con éxito, recuerda llegar al sitio con 15 minutos de antelación.',
+                icon: 'success'
+            }
+        ).then((result) => {
+            if (result.isConfirmed) {
+                window.location.assign("../models/reservas.html");
+            }
+        })
+    });   
+}
+
+function renderPaymentPage(seleccionUsuario = [], dateTime){
+    main.innerHTML = `
+        <h1>${seleccionUsuario[0].name +" - "+seleccionUsuario[0].ciudad}</h1>
+        <div class="row mb-3">
+            <div class="col-xxl-6 themed-grid-col">
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="../images/Logo.png" class="img-fluid rounded-start" alt="...">
+                        </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">Datos de la reserva</h5>
+                                    <p class="card-text text-color">Por favor verifica los datos de la reserva antes de proceder con el pago.</p>
+                                    <p class="card-text text-color">Nombres: ${userData[0].nombre}</p>
+                                    <p class="card-text text-color">Apellidos: ${userData[0].apellido}</p>
+                                    <p class="card-text text-color">Cancha: 
+                                        <select id="selectCancha" class="form-select" aria-label="Default select example">
+                                            <option selected>Selecciona una cancha...</option>
+                                        </select>
+                                    </p>
+                                    <p id="price" class="card-text text-color">Precio/hora: $0</p>
+                                    <p class="card-text text-color">Fecha de reserva: ${dateTime.day}/${dateTime.monthLong}/${dateTime.year}</p>
+                                    <p class="card-text text-color">Hora de reserva: ${dateTime.hour}:00</p>
+                                </div>
+                            </div>   
+                    </div>
+                </div>
+            </div>
+            <div class="col-xxl-6 themed-grid-col">
+                <div class="contenedor">
+                    <!-- Tarjeta -->
+                    <section class="tarjeta" id="tarjeta">
+                        <div class="delantera">
+                            <div class="logo-marca" id="logo-marca">
+                            </div>
+                            <img src="../images/chip-tarjeta.png" class="chip" alt="">
+                            <div class="datos">
+                                <div class="grupo" id="numero">
+                                    <p class="label">Número Tarjeta</p>
+                                    <p class="numero">1233 4566 7788 9900</p>
+                                </div>
+                                <div class="flexbox">
+                                    <div class="grupo" id="nombre">
+                                        <p class="label">Nombre Tarjeta</p>
+                                        <p class="nombre">Jhon Doe</p>
+                                    </div>
+                                    <div class="grupo" id="expiracion">
+                                        <p class="label">Expiracion</p>
+                                        <p class="expiracion"><span class="mes">MM</span> / <span class="year">AA</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="trasera">
+                            <div class="barra-magnetica"></div>
+                            <div class="datos">
+                                <div class="grupo" id="firma">
+                                    <p class="label">Firma</p>
+                                    <div class="firma"><p></p></div>
+                                </div>
+                                <div class="grupo" id="ccv">
+                                    <p class="label">CCV</p>
+                                    <p class="ccv"></p>
+                                </div>
+                            </div>
+                            <p class="leyenda">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus exercitationem, voluptates illo.</p>
+                            <a href="#" class="link-banco">www.tubanco.com</a>
+                        </div>
+                    </section>        
+                    <!-- Contenedor Boton Abrir Formulario -->
+                    <div class="contenedor-btn">
+                        <button class="btn-abrir-formulario active" id="btn-abrir-formulario">
+                            <i class="fas fa-plus" aria-hidden="true"></i>
+                        </button>
+                    </div>
+            
+                    <!-- Formulario -->
+                    <form action="" id="formulario-tarjeta" class="formulario-tarjeta active">
+                        <div class="grupo">
+                            <label for="inputNumero">Número Tarjeta</label>
+                            <input type="text" id="inputNumero" maxlength="19" autocomplete="off">
+                        </div>
+                        <div class="grupo">
+                            <label for="inputNombre">Nombre</label>
+                            <input type="text" id="inputNombre" maxlength="19" autocomplete="off">
+                        </div>
+                        <div class="flexbox">
+                            <div class="grupo expira">
+                                <label for="selectMes">Expiracion</label>
+                                <div class="flexbox">
+                                    <div class="grupo-select">
+                                        <select name="mes" id="selectMes">
+                                            <option disabled="" selected="">Mes</option>
+                                        <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select>
+                                        <i class="fas fa-angle-down" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="grupo-select">
+                                        <select name="year" id="selectYear">
+                                            <option disabled="" selected="">Año</option>
+                                        <option value="2022">2022</option><option value="2023">2023</option><option value="2024">2024</option><option value="2025">2025</option><option value="2026">2026</option><option value="2027">2027</option><option value="2028">2028</option><option value="2029">2029</option><option value="2030">2030</option></select>
+                                        <i class="fas fa-angle-down" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                            </div>
+            
+                            <div class="grupo ccv">
+                                <label for="inputCCV">CCV</label>
+                                <input type="text" id="inputCCV" maxlength="3">
+                            </div>
+                        </div>
+                        <button id="boton-enviar" type="submit" class="btn-enviar">Enviar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    `;
+    const selectCancha = document.querySelector("#selectCancha"),
+          priceField = document.querySelector("#price");
+
+    for(const el of seleccionUsuario[0].formatos){
+        const optionCancha = document.createElement("option");
+        optionCancha.innerHTML = `${el.formato} [${el.cantidad}]`;
+        selectCancha.appendChild(optionCancha);
+    }
+    selectCancha.addEventListener("change",e =>mostrarPrecio(e,seleccionUsuario[0], priceField));
+    payment(); 
+
+}
+
+function payment(){
+    const tarjeta = document.querySelector('#tarjeta'),
+	  btnAbrirFormulario = document.querySelector('#btn-abrir-formulario'),
+	  formulario = document.querySelector('#formulario-tarjeta'),
+	  numeroTarjeta = document.querySelector('#tarjeta .numero'),
+	  nombreTarjeta = document.querySelector('#tarjeta .nombre'),
+	  logoMarca = document.querySelector('#logo-marca'),
+	  firma = document.querySelector('#tarjeta .firma p'),
+	  mesExpiracion = document.querySelector('#tarjeta .mes'),
+	  yearExpiracion = document.querySelector('#tarjeta .year');
+	  ccv = document.querySelector('#tarjeta .ccv');
+
+    // * Volteamos la tarjeta para mostrar el frente.
+    const mostrarFrente = () => {
+        if(tarjeta.classList.contains('active')){
+            tarjeta.classList.remove('active');
+        }
+    }
+
+    // * Rotacion de la tarjeta
+    tarjeta.addEventListener('click', () => {
+        tarjeta.classList.toggle('active');
+    });
+
+    // * Boton de abrir formulario
+    btnAbrirFormulario.addEventListener('click', () => {
+        btnAbrirFormulario.classList.toggle('active');
+        formulario.classList.toggle('active');
+    });
+
+    // * Select del mes generado dinamicamente.
+    for(let i = 1; i <= 12; i++){
+        let opcion = document.createElement('option');
+        opcion.value = i;
+        opcion.innerText = i;
+        formulario.selectMes.appendChild(opcion);
+    }
+
+    // * Select del año generado dinamicamente.
+    const yearActual = new Date().getFullYear();
+    for(let i = yearActual; i <= yearActual + 8; i++){
+        let opcion = document.createElement('option');
+        opcion.value = i;
+        opcion.innerText = i;
+        formulario.selectYear.appendChild(opcion);
+    }
+
+    // * Input numero de tarjeta
+    formulario.inputNumero.addEventListener('keyup', (e) => {
+        let valorInput = e.target.value;
+
+        formulario.inputNumero.value = valorInput
+        // Eliminamos espacios en blanco
+        .replace(/\s/g, '')
+        // Eliminar las letras
+        .replace(/\D/g, '')
+        // Ponemos espacio cada cuatro numeros
+        .replace(/([0-9]{4})/g, '$1 ')
+        // Elimina el ultimo espaciado
+        .trim();
+
+        numeroTarjeta.textContent = valorInput;
+
+        if(valorInput == ''){
+            numeroTarjeta.textContent = '#### #### #### ####';
+
+            logoMarca.innerHTML = '';
+        }
+
+        if(valorInput[0] == 4){
+            logoMarca.innerHTML = '';
+            const imagen = document.createElement('img');
+            imagen.src = '../images/logos/visa.png';
+            logoMarca.appendChild(imagen);
+        } else if(valorInput[0] == 5){
+            logoMarca.innerHTML = '';
+            const imagen = document.createElement('img');
+            imagen.src = '../images/logos/mastercard.png';
+            logoMarca.appendChild(imagen);
+        }
+
+        // Volteamos la tarjeta para que el usuario vea el frente.
+        mostrarFrente();
+    });
+
+    // * Input nombre de tarjeta
+    formulario.inputNombre.addEventListener('keyup', (e) => {
+        let valorInput = e.target.value;
+
+        formulario.inputNombre.value = valorInput.replace(/[0-9]/g, '');
+        nombreTarjeta.textContent = valorInput;
+        firma.textContent = valorInput;
+
+        if(valorInput == ''){
+            nombreTarjeta.textContent = 'Jhon Doe';
+        }
+
+        mostrarFrente();
+    });
+
+    // * Select mes
+    formulario.selectMes.addEventListener('change', (e) => {
+        mesExpiracion.textContent = e.target.value;
+        mostrarFrente();
+    });
+
+    // * Select Año
+    formulario.selectYear.addEventListener('change', (e) => {
+        yearExpiracion.textContent = e.target.value.slice(2);
+        mostrarFrente();
+    });
+
+    // * CCV
+    formulario.inputCCV.addEventListener('keyup', () => {
+        if(!tarjeta.classList.contains('active')){
+            tarjeta.classList.toggle('active');
+        }
+
+        formulario.inputCCV.value = formulario.inputCCV.value
+        // Eliminar los espacios
+        .replace(/\s/g, '')
+        // Eliminar las letras
+        .replace(/\D/g, '');
+
+        ccv.textContent = formulario.inputCCV.value;
+    });
+
+    
+}
+
+function mostrarPrecio(e,seleccionUsuario=[], priceField){
+    seleccionUsuario.formatos.forEach((el)=>{
+        if(e.target.value == el.formato+" "+"["+el.cantidad+"]")
+            priceField.innerHTML=`Precio/hora: $${el.precio_hora}`;
+        else if(e.target.value == "Selecciona una cancha..."){
+            priceField.innerHTML=`Precio/hora: $0`;
+        }
+    }) 
 }
 
 function renderTarjetasCanchas(data, dataCiudades){
@@ -233,6 +528,9 @@ function renderTarjetasCanchas(data, dataCiudades){
                 )
             gridCards.className = "row row-cols-1 row-cols-md-3 g-4";
             main.appendChild(gridCards);
+            let h = DateTime.fromFormat(optionhour,"H:mm");
+            let dur = Duration.fromObject({hours:h.hour});
+            localStorage.setItem(`${userData[0].id}`,`${d.plus(dur.toObject())}`);
         }
         else
             Swal.fire(  
@@ -278,7 +576,7 @@ function crearTarjeta(canchaId, title, direccion, source_img){
             <div class="card-body">
                 <h5 id="title${canchaId}" class="card-title">${title}</h5>
                 <p class="card-text">${direccion}</p>
-                <a id="${canchaId}" href="#" class="btn btn-primary btn__verCanchas">Ver Cancha</a>
+                <a id="${canchaId}" href="#" class="btn btn-primary btn__verCanchas">Ver Canchas</a>
             </div>
         </div>
     `;
