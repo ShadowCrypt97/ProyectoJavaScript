@@ -178,16 +178,14 @@ function canchaSeleccionada(evt, data=[]){
     })
     localStorage.setItem("canchaSeleccionada",JSON.stringify(seleccionUsuario[0]));
     renderPaymentPage(seleccionUsuario, dateTime);
-    realizarPago();
-    
-          
+    realizarPago();      
 }
 
-function realizarPago(){
+async function realizarPago(){
     const sendBtn = document.querySelector('#boton-enviar');
     // prevent default y mensaje de pago exitoso
     sendBtn.addEventListener("click",e=>{
-        e.preventDefault();
+        e.preventDefault();      
         Swal.fire(
             {
                 allowOutsideClick: false,
@@ -196,9 +194,7 @@ function realizarPago(){
                 icon: 'success'
             }
         ).then((result) => {
-            if (result.isConfirmed) {
-                window.location.assign("../models/reservas.html");
-            }
+            result.isConfirmed && window.location.assign("../models/reservas.html");
         })
     });   
 }
@@ -215,7 +211,7 @@ function renderPaymentPage(seleccionUsuario = [], dateTime){
                         </div>
                             <div class="col-md-8">
                                 <div class="card-body">
-                                    <h5 class="card-title">Datos de la reserva</h5>
+                                    <h5 class="card-title title">Datos de la reserva</h5>
                                     <p class="card-text text-color">Por favor verifica los datos de la reserva antes de proceder con el pago.</p>
                                     <p class="card-text text-color">Nombres: ${userData[0].nombre}</p>
                                     <p class="card-text text-color">Apellidos: ${userData[0].apellido}</p>
@@ -297,13 +293,13 @@ function renderPaymentPage(seleccionUsuario = [], dateTime){
                                     <div class="grupo-select">
                                         <select name="mes" id="selectMes">
                                             <option disabled="" selected="">Mes</option>
-                                        <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select>
+                                        </select>
                                         <i class="fas fa-angle-down" aria-hidden="true"></i>
                                     </div>
                                     <div class="grupo-select">
                                         <select name="year" id="selectYear">
                                             <option disabled="" selected="">Año</option>
-                                        <option value="2022">2022</option><option value="2023">2023</option><option value="2024">2024</option><option value="2025">2025</option><option value="2026">2026</option><option value="2027">2027</option><option value="2028">2028</option><option value="2029">2029</option><option value="2030">2030</option></select>
+                                        </select>
                                         <i class="fas fa-angle-down" aria-hidden="true"></i>
                                     </div>
                                 </div>

@@ -49,6 +49,12 @@
   transition: transform 2s, -webkit-transform 2s;
 }
 
+@media screen and (max-width: 768px) {
+  .img--size {
+    display: none !important;
+  }
+}
+
 .img--size:hover {
   -webkit-transform: scale(1.5);
           transform: scale(1.5);
@@ -269,6 +275,10 @@
       grid-template-rows: auto auto;
 }
 
+.header-bar {
+  background-color: #ddeefc;
+}
+
 .login {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -317,6 +327,12 @@
   width: 50%;
 }
 
+@media screen and (max-width: 768px) {
+  .reservas__agendamiento {
+    width: 100%;
+  }
+}
+
 .cards__grid {
   display: -ms-grid;
   display: grid;
@@ -327,6 +343,11 @@
 }
 
 .text-color {
+  font-weight: 400;
+  color: black;
+}
+
+.title {
   font-weight: 600;
   color: black;
 }

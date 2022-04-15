@@ -1,3 +1,5 @@
+@import "./mediaQueries";
+
 .headerContainer{
     display: flex;
     background-color: $negro;
@@ -15,6 +17,9 @@
     width: 150px;
     transform: scale(1);
     transition: transform 2s;
+    @include mobile{
+        display: none!important;
+    }
 }
 
 .img--size:hover{

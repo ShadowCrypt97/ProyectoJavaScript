@@ -1,3 +1,4 @@
+@import "./mediaQueries";
 .reservas__grid{
     display: grid;
     grid-template-rows: auto;
@@ -8,6 +9,9 @@
     display: flex;
     flex-direction: column;
     width: 50%;
+    @include mobile{
+        width: 100%;
+    }
 }
 
 .cards__grid{
@@ -17,8 +21,13 @@
 }
 
 .text-color{
+    font-weight: 400;
+    color: black;
+}
+
+.title{
     font-weight: 600;
-    color:black;
+    color:black;  
 }
 
 body {
